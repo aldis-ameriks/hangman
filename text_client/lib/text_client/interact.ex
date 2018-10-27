@@ -1,11 +1,11 @@
 defmodule TextClient.Interact do
 
-  alias TextClient.State
+  alias TextClient.{Player, State}
 
   def start() do
     Hangman.new_game()
     |> setup_state()
-    |> IO.inspect
+    |> Player.play()
   end
 
   defp setup_state(game) do
