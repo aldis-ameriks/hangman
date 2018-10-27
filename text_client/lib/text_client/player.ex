@@ -22,7 +22,7 @@ defmodule TextClient.Player do
   end
 
   def play(game = %State{tally: %{game_state: :bad_guess}}) do
-    continue_with_message(game, "One step closer to your destiny.")
+    continue_with_message(game, "One step closer to your demise.")
   end
 
   def play(game = %State{tally: %{game_state: :already_used}}) do
