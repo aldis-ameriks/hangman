@@ -1,3 +1,3 @@
 defmodule Dictionary do
-  defdelegate random_word, to: Dictionary.Dictionary
+  defdelegate random_word, to: Dictionary.WordList
 end

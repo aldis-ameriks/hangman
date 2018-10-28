@@ -1,4 +1,4 @@
-defmodule Dictionary.Dictionary do
+defmodule Dictionary.WordList do
   def random_word do
     word_list()
     |> Enum.random()
