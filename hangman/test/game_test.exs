@@ -8,7 +8,7 @@ defmodule GameTest do
     assert game.turns_left == 7
     assert game.game_state == :initializing
     assert length(game.letters) > 0
-    assert game.letters |> Enum.all?(fn _ -> ?x in 97..122 end)
+    assert game.letters |> Enum.all?(fn(x) -> String.match?(x, ~r/\A[a-z]\z/) end)
   end
 
   test "state isn't changed for :won or :lost game" do
@@ -88,7 +88,7 @@ defmodule GameTest do
     game = Game.new_game("word") |> Game.make_move("")
     assert game.game_state == :invalid_guess
 
-    # game = Game.new_game("word") |> Game.make_move("W")
-    # assert game.game_state == :invalid_guess
+    game = Game.new_game("word") |> Game.make_move("W")
+    assert game.game_state == :invalid_guess
   end
 end

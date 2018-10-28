@@ -36,8 +36,7 @@ defmodule Hangman.Game do
   #############################################################################
 
   defp is_single_character(guess) do
-    parsed_guess = String.split(guess, "", trim: true)
-    parsed_guess |> Enum.count() == 1 and parsed_guess |> Enum.all?(fn _ -> ?x in 97..122 end)
+    String.match?(guess, ~r/\A[a-z]\z/)
   end
 
   defp validate_guess(game, guess, _guess_is_valid = true) do
