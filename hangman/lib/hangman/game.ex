@@ -23,7 +23,6 @@ defmodule Hangman.Game do
   def make_move(game, guess) do
     validate_guess(game, guess, is_single_character(guess))
     |> return_with_tally
-
   end
 
   def tally(game) do
@@ -88,6 +87,6 @@ defmodule Hangman.Game do
   defp maybe_won(_), do: :good_guess
 
   defp return_with_tally(game) do
-    { game, tally(game) }
+    {game, tally(game)}
   end
 end
