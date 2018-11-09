@@ -28,8 +28,9 @@ defmodule SocketGallowsWeb do
 
   def view do
     quote do
-      use Phoenix.View, root: "lib/socket_gallows_web/templates",
-                        namespace: SocketGallowsWeb
+      use Phoenix.View,
+        root: "lib/socket_gallows_web/templates",
+        namespace: SocketGallowsWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 2, view_module: 1]
