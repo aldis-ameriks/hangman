@@ -1,5 +1,4 @@
 defmodule TextClient.Interact do
-
   @hangman_server :hangman@AMAC02S8733G8WN
   alias TextClient.{Player, State}
 

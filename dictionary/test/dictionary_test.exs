@@ -4,7 +4,7 @@ defmodule DictionaryTest do
 
   test "word_list returns a list of words" do
     words = WordList.word_list()
-    assert words |> Enum.count > 0
+    assert words |> Enum.count() > 0
   end
 
   test "random_word/0 returns a random word" do
