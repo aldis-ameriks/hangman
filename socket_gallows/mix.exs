@@ -37,7 +37,9 @@ defmodule SocketGallows.Mixfile do
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
-      {:plug_cowboy, "~> 1.0"}
+      {:plug_cowboy, "~> 1.0"},
+
+      {:hangman, [path: "../hangman"]},
     ]
   end
 end
