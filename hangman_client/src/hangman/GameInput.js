@@ -26,7 +26,7 @@ class GameInput extends React.Component {
           Enter your best guess below.
         </Typography>
         <TextField
-          inputProps={{ maxLength: 1 }}
+          inputProps={{ maxLength: 1, 'data-testid': 'guess' }}
           value={guess}
           onChange={e => this.setState({ guess: e.target.value })}
         />
