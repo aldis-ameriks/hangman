@@ -1,9 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-testing-library';
 import App from './App';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+describe('App', () => {
+  it('initially', () => {
+    // TODO: What's the best approach for mocking sockets?
+    const component = render(<App />);
+    expect(component.baseElement).toMatchSnapshot();
+  });
 });

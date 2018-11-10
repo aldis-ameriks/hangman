@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App initially 1`] = `
+<body>
+  <div>
+    <main
+      class="App-layout-1"
+    >
+      <div
+        class="MuiPaper-root-5 MuiPaper-elevation2-9 MuiPaper-rounded-6 App-paper-2"
+      >
+        <div
+          class="MuiCircularProgress-root-32 MuiCircularProgress-colorPrimary-35 MuiCircularProgress-indeterminate-34"
+          role="progressbar"
+          style="width: 40px; height: 40px; display: block; margin: auto;"
+        >
+          <svg
+            class="MuiCircularProgress-svg-37"
+            viewBox="22 22 44 44"
+          >
+            <circle
+              class="MuiCircularProgress-circle-38 MuiCircularProgress-circleIndeterminate-40"
+              cx="44"
+              cy="44"
+              fill="none"
+              r="20.2"
+              stroke-width="3.6"
+            />
+          </svg>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+`;
