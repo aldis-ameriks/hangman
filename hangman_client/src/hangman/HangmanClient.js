@@ -1,5 +1,7 @@
 import { Socket } from 'phoenix-socket';
 
+let channel = null;
+
 const setupSocket = url => {
   const socket = new Socket(url, {});
   socket.connect();
@@ -7,7 +9,7 @@ const setupSocket = url => {
 };
 
 const setupChannel = (socket, handleResponse) => {
-  const channel = socket.channel('hangman:game', {});
+  channel = socket.channel('hangman:game', {});
   channel
     .join()
     .receive('ok', resp => {
@@ -21,19 +23,17 @@ const setupChannel = (socket, handleResponse) => {
   channel.on('make_move', handleResponse);
   channel.on('new_game', handleResponse);
   channel.push('new_game', {});
-  return channel;
 };
 
-export const initializeConnection = (url, handleResponse) => {
+export const initializeGame = (url, handleResponse) => {
   const socket = setupSocket(url);
-  const channel = setupChannel(socket, handleResponse);
-  return channel;
+  setupChannel(socket, handleResponse);
 };
 
-export const startNewGame = channel => {
+export const startNewGame = () => {
   channel.push('new_game', {});
 };
 
-export const makeMove = (channel, guess) => {
+export const makeMove = guess => {
   channel.push('make_move', { guess });
 };

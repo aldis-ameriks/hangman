@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress';
-import { initializeConnection, startNewGame, makeMove } from './HangmanClient';
+import { initializeGame, startNewGame, makeMove } from './HangmanClient';
 
 class HangmanProvider extends React.Component {
   state = {
@@ -19,7 +19,7 @@ class HangmanProvider extends React.Component {
 
   componentDidMount() {
     const handleResponse = tally => this.setState({ game: tally });
-    this.channel = initializeConnection('ws://localhost:4000/socket', handleResponse);
+    initializeGame('ws://localhost:4000/socket', handleResponse);
   }
 
   render() {
@@ -30,8 +30,8 @@ class HangmanProvider extends React.Component {
     }
 
     return this.props.render({
-      makeMove: guess => makeMove(this.channel, guess),
-      startNewGame: () => startNewGame(this.channel),
+      makeMove,
+      startNewGame,
       notification: this.notifications[game.game_state],
       letters: game.letters.join(' '),
       used: game.used.join(' '),
