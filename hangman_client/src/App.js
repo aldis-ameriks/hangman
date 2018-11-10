@@ -34,14 +34,14 @@ const App = ({ classes }) => (
   <main className={classes.layout}>
     <Paper className={classes.paper}>
       <HangmanProvider
-        render={({ startNewGame, makeMove, turnsLeft, letters, used, notification, isLost }) => (
+        render={({ startNewGame, makeMove, turnsLeft, letters, used, notification, isGameOver }) => (
           <Grid container spacing={40}>
             <Grid item sm={6} xs={12}>
               <Gallows />
             </Grid>
             <Grid item sm={6} xs={12}>
               <GameState letters={letters} notification={notification} turnsLeft={turnsLeft} used={used} />
-              {isLost ? (
+              {isGameOver ? (
                 <NewGameButton classes={classes} startNewGame={startNewGame} />
               ) : (
                 <GameInput makeMove={makeMove} classes={classes} />

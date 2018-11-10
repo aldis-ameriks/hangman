@@ -36,7 +36,7 @@ class HangmanProvider extends React.Component {
       letters: game.letters.join(' '),
       used: game.used.join(' '),
       turnsLeft: game.turns_left,
-      isLost: game.game_state === 'lost'
+      isGameOver: game.game_state === 'lost' || game.game_state === 'won'
     });
   }
 }
