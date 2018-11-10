@@ -1,11 +1,49 @@
 import React from 'react';
-import { render } from 'react-testing-library';
+import { render, waitForElement } from 'react-testing-library';
 import App from './App';
 
+jest.mock('./hangman/HangmanClient', () => ({
+  initializeGame: jest.fn(),
+  startNewGame: jest.fn(),
+  makeMove: jest.fn()
+}));
+
 describe('App', () => {
-  it('initially', () => {
-    // TODO: What's the best approach for mocking sockets?
-    const component = render(<App />);
-    expect(component.baseElement).toMatchSnapshot();
+  let initializeGame;
+
+  describe('initially', () => {
+    it('renders loader', () => {
+      const component = render(<App />);
+      expect(component.queryByRole('progressbar')).toBeInTheDocument();
+      expect(component.baseElement).toMatchSnapshot();
+    });
+  });
+
+  describe('when game has loaded', () => {
+    beforeEach(() => {
+      initializeGame = jest.fn().mockImplementation((url, cb) => {
+        cb({ game_state: 'initializing', letters: [], used: [], turns_left: 1 });
+      });
+      require('./hangman/HangmanClient').initializeGame = initializeGame;
+    });
+
+    it('renders the game', async () => {
+      const component = render(<App />);
+      await waitForElement(() => component.getByText('Enter your best guess below.'));
+    });
+  });
+
+  describe('when game is lost', () => {
+    beforeEach(() => {
+      initializeGame = jest.fn().mockImplementation((url, cb) => {
+        cb({ game_state: 'lost', letters: [], used: [], turns_left: 1 });
+      });
+      require('./hangman/HangmanClient').initializeGame = initializeGame;
+    });
+
+    it('renders button to start new game', async () => {
+      const component = render(<App />);
+      await waitForElement(() => component.getByText('Start new game'));
+    });
   });
 });
