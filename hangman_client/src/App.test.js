@@ -29,7 +29,10 @@ describe('App', () => {
 
     it('renders the game', async () => {
       const component = render(<App />);
-      await waitForElement(() => component.getByText('Enter your best guess below.'));
+      const gameTitle = component.getByText('Enter your best guess below.');
+      await waitForElement(() => gameTitle);
+      expect(gameTitle).toBeInTheDocument();
+      expect(component.baseElement).toMatchSnapshot();
     });
   });
 
@@ -43,7 +46,10 @@ describe('App', () => {
 
     it('renders button to start new game', async () => {
       const component = render(<App />);
-      await waitForElement(() => component.getByText('Start new game'));
+      const newGameButton = component.getByText('Start new game');
+      await waitForElement(() => newGameButton);
+      expect(newGameButton).toBeInTheDocument();
+      expect(component.baseElement).toMatchSnapshot();
     });
   });
 });
