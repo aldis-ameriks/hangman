@@ -9,6 +9,7 @@ import HangmanProvider from './hangman/HangmanProvider';
 import GameState from './hangman/GameState';
 import GameInput from './hangman/GameInput';
 import NewGameButton from './hangman/NewGameButton';
+import NavigationBar from './components/NavigationBar';
 
 const styles = theme => ({
   layout: {
@@ -30,28 +31,46 @@ const styles = theme => ({
   }
 });
 
+const HangmanGame = ({ letters, notification, turnsLeft, used, isGameOver, classes, startNewGame, makeMove }) => (
+  <Grid container spacing={40}>
+    <Grid item sm={6} xs={12}>
+      <Gallows />
+    </Grid>
+    <Grid item sm={6} xs={12}>
+      <GameState letters={letters} notification={notification} turnsLeft={turnsLeft} used={used} />
+      {isGameOver ? (
+        <NewGameButton classes={classes} startNewGame={startNewGame} />
+      ) : (
+        <GameInput makeMove={makeMove} classes={classes} />
+      )}
+    </Grid>
+  </Grid>
+);
+
+HangmanGame.propTypes = {
+  letters: PropTypes.string.isRequired,
+  used: PropTypes.string.isRequired,
+  turnsLeft: PropTypes.number.isRequired,
+  isGameOver: PropTypes.bool.isRequired,
+  startNewGame: PropTypes.func.isRequired,
+  makeMove: PropTypes.func.isRequired,
+  classes: PropTypes.shape({}).isRequired,
+  notification: PropTypes.shape({ type: PropTypes.string, message: PropTypes.string })
+};
+
+HangmanGame.defaultProps = {
+  notification: null
+};
+
 const App = ({ classes }) => (
-  <main className={classes.layout}>
-    <Paper className={classes.paper}>
-      <HangmanProvider
-        render={({ startNewGame, makeMove, turnsLeft, letters, used, notification, isGameOver }) => (
-          <Grid container spacing={40}>
-            <Grid item sm={6} xs={12}>
-              <Gallows />
-            </Grid>
-            <Grid item sm={6} xs={12}>
-              <GameState letters={letters} notification={notification} turnsLeft={turnsLeft} used={used} />
-              {isGameOver ? (
-                <NewGameButton classes={classes} startNewGame={startNewGame} />
-              ) : (
-                <GameInput makeMove={makeMove} classes={classes} />
-              )}
-            </Grid>
-          </Grid>
-        )}
-      />
-    </Paper>
-  </main>
+  <>
+    <NavigationBar />
+    <main className={classes.layout}>
+      <Paper className={classes.paper}>
+        <HangmanProvider render={gameState => <HangmanGame classes={classes} {...gameState} />} />
+      </Paper>
+    </main>
+  </>
 );
 
 App.propTypes = {

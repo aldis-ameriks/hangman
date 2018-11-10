@@ -1,25 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App initially 1`] = `
+exports[`App initially renders loader 1`] = `
 <body>
   <div>
+    <header
+      class="MuiPaper-root-14 MuiPaper-elevation4-20 MuiAppBar-root-5 MuiAppBar-positionStatic-9 MuiAppBar-colorDefault-11"
+    >
+      <div
+        class="MuiToolbar-root-41 MuiToolbar-regular-43 MuiToolbar-gutters-42"
+      >
+        <h2
+          class="MuiTypography-root-45 MuiTypography-title-51 MuiTypography-colorInherit-74"
+        >
+          Hangyman
+        </h2>
+      </div>
+    </header>
     <main
       class="App-layout-1"
     >
       <div
-        class="MuiPaper-root-5 MuiPaper-elevation2-9 MuiPaper-rounded-6 App-paper-2"
+        class="MuiPaper-root-14 MuiPaper-elevation2-18 MuiPaper-rounded-15 App-paper-2"
       >
         <div
-          class="MuiCircularProgress-root-32 MuiCircularProgress-colorPrimary-35 MuiCircularProgress-indeterminate-34"
+          class="MuiCircularProgress-root-80 MuiCircularProgress-colorPrimary-83 MuiCircularProgress-indeterminate-82"
           role="progressbar"
           style="width: 40px; height: 40px; display: block; margin: auto;"
         >
           <svg
-            class="MuiCircularProgress-svg-37"
+            class="MuiCircularProgress-svg-85"
             viewBox="22 22 44 44"
           >
             <circle
-              class="MuiCircularProgress-circle-38 MuiCircularProgress-circleIndeterminate-40"
+              class="MuiCircularProgress-circle-86 MuiCircularProgress-circleIndeterminate-88"
               cx="44"
               cy="44"
               fill="none"
