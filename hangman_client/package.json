@@ -1,16 +1,16 @@
 {
-  "name": "client",
+  "name": "hangman-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.4.0",
     "@material-ui/icons": "^3.0.1",
     "phoenix-socket": "^1.2.3",
-    "prop-types": "^15.6.2",
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
     "react-scripts": "2.1.1",
-    "styled-components": "^4.0.3"
+    "styled-components": "^4.0.3",
+    "typescript": "^3.1.6"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -19,27 +19,27 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "eslint": "5.6.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-config-prettier": "^3.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jsx-a11y": "^6.1.2",
-    "eslint-plugin-prettier": "^3.0.0",
-    "eslint-plugin-react": "^7.11.1",
+    "@types/jest": "23.3.9",
+    "@types/node": "10.12.5",
+    "@types/react": "16.7.2",
+    "@types/react-dom": "16.0.9",
+    "@types/styled-components": "^4.0.3",
     "jest-dom": "^2.1.1",
     "prettier": "^1.15.1",
-    "react-testing-library": "^5.2.3"
+    "react-testing-library": "^5.2.3",
+    "tslint": "^5.11.0",
+    "tslint-config-airbnb": "^5.11.0",
+    "tslint-config-prettier": "^1.15.0",
+    "tslint-plugin-prettier": "^2.0.1",
+    "tslint-react": "^3.6.0"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ],
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx}",
-      "!src/index.js"
-    ]
-  }
+  ]
 }
