@@ -1,4 +1,3 @@
-// @ts-ignore
 import * as pheonix from 'phoenix-socket';
 import { HangmanGameTally, initializeGame, makeMove, startNewGame } from './HangmanClient';
 

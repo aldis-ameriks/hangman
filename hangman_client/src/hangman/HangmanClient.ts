@@ -1,4 +1,3 @@
-// @ts-ignore
 import { Socket } from 'phoenix-socket';
 
 export type HangmanGameTally = {
