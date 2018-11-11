@@ -15,7 +15,6 @@ describe('App', () => {
     it('renders loader', () => {
       const component = render(<App />);
       expect(component.queryByRole('progressbar')).toBeInTheDocument();
-      expect(component.baseElement).toMatchSnapshot();
     });
   });
 
@@ -32,7 +31,6 @@ describe('App', () => {
       const gameTitle = component.getByText('Enter your best guess below.');
       await waitForElement(() => gameTitle);
       expect(gameTitle).toBeInTheDocument();
-      expect(component.baseElement).toMatchSnapshot();
     });
   });
 
@@ -49,7 +47,6 @@ describe('App', () => {
       const newGameButton = component.getByText('Start new game');
       await waitForElement(() => newGameButton);
       expect(newGameButton).toBeInTheDocument();
-      expect(component.baseElement).toMatchSnapshot();
     });
   });
 });
