@@ -1,6 +1,6 @@
 // @ts-ignore
 import * as pheonix from 'phoenix-socket';
-import { initializeGame, makeMove, startNewGame, HangmanGameTally } from './HangmanClient';
+import { HangmanGameTally, initializeGame, makeMove, startNewGame } from './HangmanClient';
 
 jest.mock('phoenix-socket');
 
