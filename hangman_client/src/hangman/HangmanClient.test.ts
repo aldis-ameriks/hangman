@@ -32,9 +32,10 @@ describe('HangmanClient', () => {
     }
   }
 
+  // noinspection TsLint
   class SocketMock {
+    // noinspection TsLint
     public connect() {}
-
     public channel(name: string, params: any) {
       channelStub(name, params);
       return new ChannelMock();

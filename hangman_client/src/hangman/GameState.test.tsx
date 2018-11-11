@@ -1,12 +1,13 @@
-import * as React from 'react';
+import React from 'react';
 import { render } from 'react-testing-library';
+import { NotificationType } from '../components/Notification';
 import GameState from './GameState';
 
 describe('GameState', () => {
   const used = 'used';
   const letters = 'letters';
   const turnsLeft = 2;
-  const notification = { type: 'error', message: 'msg' };
+  const notification = { type: 'error' as NotificationType, message: 'msg' };
   let container: HTMLElement;
 
   describe('when notification is given', () => {

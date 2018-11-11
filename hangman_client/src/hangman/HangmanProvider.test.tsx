@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { render, RenderResult } from 'react-testing-library';
 import * as HangmanClient from './HangmanClient';
 import HangmanProvider from './HangmanProvider';
