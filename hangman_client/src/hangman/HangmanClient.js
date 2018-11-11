@@ -12,11 +12,8 @@ const setupChannel = (socket, handleResponse) => {
   channel = socket.channel('hangman:game', {});
   channel
     .join()
-    .receive('ok', resp => {
-      console.log(`connected: ${resp}`);
-    })
+    .receive('ok', () => {})
     .receive('error', resp => {
-      alert(resp);
       throw resp;
     });
 
