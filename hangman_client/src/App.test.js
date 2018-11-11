@@ -1,12 +1,9 @@
 import React from 'react';
 import { render, waitForElement } from 'react-testing-library';
 import App from './App';
+import * as HangmanClient from './hangman/HangmanClient';
 
-jest.mock('./hangman/HangmanClient', () => ({
-  initializeGame: jest.fn(),
-  startNewGame: jest.fn(),
-  makeMove: jest.fn()
-}));
+jest.mock('./hangman/HangmanClient');
 
 describe('App', () => {
   let initializeGame;
@@ -23,7 +20,7 @@ describe('App', () => {
       initializeGame = jest.fn().mockImplementation((url, cb) => {
         cb({ game_state: 'initializing', letters: [], used: [], turns_left: 1 });
       });
-      require('./hangman/HangmanClient').initializeGame = initializeGame;
+      HangmanClient.initializeGame = initializeGame;
     });
 
     it('renders the game', async () => {
@@ -39,7 +36,7 @@ describe('App', () => {
       initializeGame = jest.fn().mockImplementation((url, cb) => {
         cb({ game_state: 'lost', letters: [], used: [], turns_left: 1 });
       });
-      require('./hangman/HangmanClient').initializeGame = initializeGame;
+      HangmanClient.initializeGame = initializeGame;
     });
 
     it('renders button to start new game', async () => {
