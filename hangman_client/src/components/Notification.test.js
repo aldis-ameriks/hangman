@@ -10,7 +10,8 @@ describe('Notification', () => {
           <div>Child</div>
         </Notification>
       );
-      expect(component.baseElement).toMatchSnapshot();
+      expect(component.getByText('Child')).toBeInTheDocument();
+      expect(component.getByTestId('icon')).toBeInTheDocument();
     });
   });
 });

@@ -46,7 +46,7 @@ const Notification = ({ children, variant }) => {
   const Icon = variants[variant].icon;
   return (
     <NotificationStyled color={color}>
-      <IconStyled as={Icon} />
+      <IconStyled as={Icon} data-testid="icon" />
       {children}
     </NotificationStyled>
   );
