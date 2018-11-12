@@ -21,7 +21,8 @@ describe('HangmanProvider', () => {
     });
 
     it('renders loader', () => {
-      expect(component.queryByRole('progressbar')).toBeInTheDocument();
+      component.debug();
+      expect(component.queryByText('text')).toBeNull();
     });
 
     it('initializes new game', () => {

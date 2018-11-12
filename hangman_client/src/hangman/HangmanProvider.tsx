@@ -1,8 +1,14 @@
-import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress';
 import React from 'react';
 import { GameTally, initializeGame, makeMove, startNewGame } from './HangmanClient';
 
-export type GameStatus = 'good_guess' | 'bad_guess' | 'invalid_guess' | 'already_used' | 'lost' | 'won';
+export type GameStatus =
+  | 'initializing'
+  | 'good_guess'
+  | 'bad_guess'
+  | 'invalid_guess'
+  | 'already_used'
+  | 'lost'
+  | 'won';
 
 export type GameState = {
   letters: string;
@@ -31,7 +37,7 @@ class HangmanProvider extends React.Component<HangmanProviderProps, { game?: Gam
   public render() {
     const { game } = this.state;
     if (!game) {
-      return <CircularProgress style={{ display: 'block', margin: 'auto' }} />;
+      return null;
     }
 
     return this.props.render({

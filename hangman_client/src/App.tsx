@@ -1,75 +1,41 @@
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import { withStyles } from '@material-ui/core/styles';
+import * as PIXI from 'pixi.js';
 import React from 'react';
 
-import { ReactComponent as Gallows } from './components/gallows.svg';
-import NavigationBar from './components/NavigationBar';
-import GameInput from './hangman/GameInput';
-import GameState from './hangman/GameState';
-import HangmanProvider, { HangmanGameState } from './hangman/HangmanProvider';
-import NewGameButton from './hangman/NewGameButton';
+import { Stage, Text } from '@inlet/react-pixi';
+import HangmanProvider, { GameState } from './hangman/HangmanProvider';
 
-const styles = (theme: any) => ({
-  layout: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginTop: theme.spacing.unit * 4,
-    maxWidth: 1000,
-  },
-  paper: {
-    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
-    margin: `${theme.spacing.unit * 2}px`,
-  },
-  title: {
-    marginTop: theme.spacing.unit * 2,
-  },
-  button: {
-    marginTop: theme.spacing.unit * 4,
-    display: 'block',
-  },
+const textStyle = new PIXI.TextStyle({
+  fontFamily: 'Arial',
+  fontSize: 36,
+  fontStyle: 'italic',
+  fontWeight: 'bold',
+  fill: ['#ffffff', '#00ff99'], // gradient
+  stroke: '#4a1850',
+  strokeThickness: 5,
+  dropShadow: true,
+  dropShadowColor: '#000000',
+  dropShadowBlur: 4,
+  dropShadowAngle: Math.PI / 6,
+  dropShadowDistance: 6,
+  wordWrap: true,
+  wordWrapWidth: 440,
 });
 
-type HangmanGameProps = HangmanGameState & { classes: any };
+const Game: React.FunctionComponent<GameState> = ({ letters, turnsLeft, used, status, startNewGame, makeMove }) => {
+  let content;
+  switch (status) {
+    case 'initializing':
+      content = (
+        <>
+          <Text x={30} y={90} text="Hangman" style={textStyle} />
+          <Text x={30} y={280} text="Start new game" style={textStyle} />
+        </>
+      );
+  }
 
-const HangmanGame: React.FunctionComponent<HangmanGameProps> = ({
-  letters,
-  notification,
-  turnsLeft,
-  used,
-  isGameOver,
-  classes,
-  startNewGame,
-  makeMove,
-}) => (
-  <Grid container={true} spacing={40}>
-    <Grid item={true} sm={6} xs={12}>
-      <Gallows />
-    </Grid>
-    <Grid item={true} sm={6} xs={12}>
-      <GameState letters={letters} notification={notification} turnsLeft={turnsLeft} used={used} />
-      {isGameOver ? (
-        <NewGameButton classes={classes} startNewGame={startNewGame} />
-      ) : (
-        <GameInput makeMove={makeMove} classes={classes} />
-      )}
-    </Grid>
-  </Grid>
-);
-
-HangmanGame.defaultProps = {
-  notification: undefined,
+  return <Stage options={{ backgroundColor: 0x1099bb }}>{content}</Stage>;
 };
 
-const App: React.FunctionComponent<{ classes: any }> = ({ classes }) => (
-  <>
-    <NavigationBar />
-    <main className={classes.layout}>
-      <Paper className={classes.paper}>
-        <HangmanProvider render={gameState => <HangmanGame classes={classes} {...gameState} />} />
-      </Paper>
-    </main>
-  </>
-);
+const App = () => <HangmanProvider render={gameState => <Game {...gameState} />} />;
 
-export default withStyles(styles)(App);
+export default App;
