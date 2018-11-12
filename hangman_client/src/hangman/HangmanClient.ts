@@ -36,6 +36,7 @@ export const initializeGame = (url: string, handleResponse: (tally: GameTally) =
 };
 
 export const startNewGame = () => {
+  console.log('Starting new game');
   channel.push('new_game', {});
 };
 
