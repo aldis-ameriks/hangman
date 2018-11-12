@@ -1,40 +1,63 @@
 import * as PIXI from 'pixi.js';
-import React from 'react';
+import React, { Component } from 'react';
 
-import { Stage, Text } from '@inlet/react-pixi';
+import { Sprite, Stage } from '@inlet/react-pixi';
 import HangmanProvider, { GameState } from './hangman/HangmanProvider';
 
-const textStyle = new PIXI.TextStyle({
-  fontFamily: 'Arial',
-  fontSize: 36,
-  fontStyle: 'italic',
-  fontWeight: 'bold',
-  fill: ['#ffffff', '#00ff99'], // gradient
-  stroke: '#4a1850',
-  strokeThickness: 5,
-  dropShadow: true,
-  dropShadowColor: '#000000',
-  dropShadowBlur: 4,
-  dropShadowAngle: Math.PI / 6,
-  dropShadowDistance: 6,
-  wordWrap: true,
-  wordWrapWidth: 440,
-});
+type State = {
+  newGameHovered: boolean;
+};
 
-const Game: React.FunctionComponent<GameState> = ({ letters, turnsLeft, used, status, startNewGame, makeMove }) => {
-  let content;
-  switch (status) {
-    case 'initializing':
-      content = (
-        <>
-          <Text x={30} y={90} text="Hangman" style={textStyle} />
-          <Text x={30} y={280} text="Start new game" style={textStyle} />
-        </>
-      );
+class Game extends Component<GameState, State> {
+  constructor(props: GameState) {
+    super(props);
+    this.state = {
+      newGameHovered: false,
+    };
   }
 
-  return <Stage options={{ backgroundColor: 0x1099bb }}>{content}</Stage>;
-};
+  public render() {
+    const { letters, turnsLeft, used, status, startNewGame, makeMove } = this.props;
+    const width = 800;
+    const height = 600;
+    const noop = () => {
+      console.log('noop');
+    };
+    let content;
+    switch (status) {
+      case 'initializing':
+        const newGameButtonImg = this.state.newGameHovered ? 'new_game_hover' : 'new_game';
+        content = (
+          <>
+            <Sprite
+              image={`sprites/${newGameButtonImg}.png`}
+              x={width / 2}
+              y={height / 2}
+              interactive={true}
+              buttonMode={true}
+              scale={new PIXI.Point(0.5, 0.5)}
+              anchor={new PIXI.ObservablePoint(noop, null, 0.5, 0.5)}
+              pointerover={() => {
+                this.setState({ newGameHovered: true });
+              }}
+              pointerout={() => {
+                this.setState({ newGameHovered: false });
+              }}
+              pointerdown={() => {
+                console.log('pointer down');
+              }}
+              hitArea={new PIXI.Rectangle(-292, -44, 292 * 2, 44 * 2)}
+            />
+          </>
+        );
+    }
+    return (
+      <Stage options={{ backgroundColor: 0x1099bb }} width={width} height={height}>
+        {content}
+      </Stage>
+    );
+  }
+}
 
 const App = () => <HangmanProvider render={gameState => <Game {...gameState} />} />;
 
