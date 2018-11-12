@@ -33,44 +33,22 @@ describe('HangmanProvider', () => {
   describe('when initializing game', () => {
     const defaultInput = { game_state: 'initializing', letters: ['a', 'b'], used: ['c', 'd'], turns_left: 1 };
     const defaultOutput = {
-      isGameOver: false,
+      status: 'initializing',
       letters: 'a b',
       used: 'c d',
       turnsLeft: 1,
-      notification: undefined,
       startNewGame: expect.any(Function),
       makeMove: expect.any(Function),
     };
 
     [
-      {
-        input: defaultInput,
-        output: defaultOutput,
-      },
-      {
-        input: { game_state: 'won' },
-        output: { isGameOver: true, notification: { type: 'success', message: 'You may live another day.' } },
-      },
-      {
-        input: { game_state: 'lost' },
-        output: { isGameOver: true, notification: { type: 'error', message: 'Figures.' } },
-      },
-      {
-        input: { game_state: 'good_guess' },
-        output: { notification: { type: 'info', message: 'Lucky.' } },
-      },
-      {
-        input: { game_state: 'bad_guess' },
-        output: { notification: { type: 'warning', message: 'One step closer to your demise.' } },
-      },
-      {
-        input: { game_state: 'invalid_guess' },
-        output: { notification: { type: 'warning', message: 'Your negligence disgusts me.' } },
-      },
-      {
-        input: { game_state: 'already_used' },
-        output: { notification: { type: 'info', message: 'Your negligence disgusts me.' } },
-      },
+      { input: defaultInput, output: defaultOutput },
+      { input: { game_state: 'won' }, output: { status: 'won' } },
+      { input: { game_state: 'lost' }, output: { status: 'lost' } },
+      { input: { game_state: 'good_guess' }, output: { status: 'good_guess' } },
+      { input: { game_state: 'bad_guess' }, output: { status: 'bad_guess' } },
+      { input: { game_state: 'invalid_guess' }, output: { status: 'invalid_guess' } },
+      { input: { game_state: 'already_used' }, output: { status: 'already_used' } },
     ].forEach(({ input, output }) => {
       describe('given Hangman state', () => {
         beforeEach(() => {

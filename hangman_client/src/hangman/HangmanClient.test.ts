@@ -1,5 +1,5 @@
 import * as pheonix from 'phoenix-socket';
-import { HangmanGameTally, initializeGame, makeMove, startNewGame } from './HangmanClient';
+import { GameTally, initializeGame, makeMove, startNewGame } from './HangmanClient';
 
 jest.mock('phoenix-socket');
 
@@ -8,7 +8,7 @@ describe('HangmanClient', () => {
   let pushStub: jest.Mock<{}>;
   let onStub: jest.Mock<{}>;
   let receiveStub: jest.Mock<{}>;
-  let handleResponse: (tally: HangmanGameTally) => void;
+  let handleResponse: (tally: GameTally) => void;
 
   class ChannelMock {
     public receive(event: string, handler: any) {

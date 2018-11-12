@@ -1,44 +1,30 @@
 import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress';
 import React from 'react';
-import { NotificationType } from '../components/Notification';
-import { HangmanGameTally, initializeGame, makeMove, startNewGame } from './HangmanClient';
+import { GameTally, initializeGame, makeMove, startNewGame } from './HangmanClient';
 
-export type HangmanNotification = {
-  type: NotificationType;
-  message: string;
-};
+export type GameStatus = 'good_guess' | 'bad_guess' | 'invalid_guess' | 'already_used' | 'lost' | 'won';
 
-export type HangmanGameState = {
+export type GameState = {
   letters: string;
   used: string;
   turnsLeft: number;
-  isGameOver: boolean;
-  notification?: HangmanNotification;
+  status: GameStatus;
   startNewGame: () => void;
   makeMove: (guess: string) => void;
 };
 
 type HangmanProviderProps = {
-  render: (state: HangmanGameState) => React.ReactNode;
+  render: (state: GameState) => React.ReactNode;
 };
 
-class HangmanProvider extends React.Component<HangmanProviderProps, { game?: HangmanGameTally }> {
-  private notifications: { [key: string]: HangmanNotification } = {
-    good_guess: { type: 'info', message: 'Lucky.' },
-    bad_guess: { type: 'warning', message: 'One step closer to your demise.' },
-    invalid_guess: { type: 'warning', message: 'Your negligence disgusts me.' },
-    already_used: { type: 'info', message: 'Your negligence disgusts me.' },
-    lost: { type: 'error', message: 'Figures.' },
-    won: { type: 'success', message: 'You may live another day.' },
-  };
-
+class HangmanProvider extends React.Component<HangmanProviderProps, { game?: GameTally }> {
   constructor(props: HangmanProviderProps) {
     super(props);
     this.state = { game: undefined };
   }
 
   public componentDidMount() {
-    const handleResponse = (tally: HangmanGameTally) => this.setState({ game: tally });
+    const handleResponse = (tally: GameTally) => this.setState({ game: tally });
     initializeGame('ws://localhost:4000/socket', handleResponse);
   }
 
@@ -51,11 +37,10 @@ class HangmanProvider extends React.Component<HangmanProviderProps, { game?: Han
     return this.props.render({
       makeMove,
       startNewGame,
-      notification: this.notifications[game.game_state],
       letters: game.letters.join(' '),
       used: game.used.join(' '),
       turnsLeft: game.turns_left,
-      isGameOver: game.game_state === 'lost' || game.game_state === 'won',
+      status: game.game_state,
     });
   }
 }
