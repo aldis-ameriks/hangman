@@ -1,8 +1,9 @@
 import React from 'react';
-import { GameTally, initializeGame, makeMove, startNewGame } from './HangmanClient';
+import { initializeGame, makeMove, startNewGame } from './HangmanClient';
 
 export type GameStatus =
   | 'initializing'
+  | 'started'
   | 'good_guess'
   | 'bad_guess'
   | 'invalid_guess'
@@ -11,43 +12,40 @@ export type GameStatus =
   | 'won';
 
 export type GameState = {
-  letters: string;
-  used: string;
-  turnsLeft: number;
+  letters?: string[];
+  used?: string[];
+  turnsLeft?: number;
   status: GameStatus;
+};
+
+type GameControls = {
   startNewGame: () => void;
   makeMove: (guess: string) => void;
 };
 
+export type HangmanGame = GameState & GameControls;
+
 type HangmanProviderProps = {
-  render: (state: GameState) => React.ReactNode;
+  render: (game: HangmanGame) => React.ReactNode;
 };
 
-class HangmanProvider extends React.Component<HangmanProviderProps, { game?: GameTally }> {
+class HangmanProvider extends React.Component<HangmanProviderProps, { game?: GameState }> {
   constructor(props: HangmanProviderProps) {
     super(props);
     this.state = { game: undefined };
   }
 
   public componentDidMount() {
-    const handleResponse = (tally: GameTally) => this.setState({ game: tally });
+    const handleResponse = (game: GameState) => this.setState({ game });
     initializeGame('ws://localhost:4000/socket', handleResponse);
   }
 
   public render() {
-    const { game } = this.state;
-    if (!game) {
+    if (!this.state.game) {
       return null;
     }
-
-    return this.props.render({
-      makeMove,
-      startNewGame,
-      letters: game.letters.join(' '),
-      used: game.used.join(' '),
-      turnsLeft: game.turns_left,
-      status: game.game_state,
-    });
+    const { letters, used, turnsLeft, status } = this.state.game;
+    return this.props.render({ makeMove, startNewGame, letters, used, turnsLeft, status });
   }
 }
 

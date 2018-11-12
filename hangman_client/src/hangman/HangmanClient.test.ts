@@ -1,14 +1,14 @@
 import * as pheonix from 'phoenix-socket';
-import { GameTally, initializeGame, makeMove, startNewGame } from './HangmanClient';
+import { initializeGame, makeMove, startNewGame } from './HangmanClient';
+import { GameState } from './HangmanProvider';
 
 jest.mock('phoenix-socket');
 
 describe('HangmanClient', () => {
   let channelStub: jest.Mock<{}>;
   let pushStub: jest.Mock<{}>;
-  let onStub: jest.Mock<{}>;
   let receiveStub: jest.Mock<{}>;
-  let handleResponse: (tally: GameTally) => void;
+  let handleResponse: (game: GameState) => void;
 
   class ChannelMock {
     public receive(event: string, handler: any) {
@@ -21,7 +21,6 @@ describe('HangmanClient', () => {
     }
 
     public on(event: string, handler: any) {
-      onStub(event, handler);
       return this;
     }
 
@@ -45,7 +44,6 @@ describe('HangmanClient', () => {
     handleResponse = jest.fn();
     pushStub = jest.fn();
     channelStub = jest.fn();
-    onStub = jest.fn();
     receiveStub = jest.fn();
     pheonix.Socket = SocketMock;
   });
@@ -80,12 +78,6 @@ describe('HangmanClient', () => {
     it('initializes channel', () => {
       expect(channelStub).toHaveBeenCalledTimes(1);
       expect(channelStub).toHaveBeenCalledWith('hangman:game', {});
-    });
-
-    it('sets event handlers', () => {
-      expect(onStub).toHaveBeenCalledTimes(2);
-      expect(onStub).toHaveBeenCalledWith('new_game', handleResponse);
-      expect(onStub).toHaveBeenCalledWith('make_move', handleResponse);
     });
 
     it('starts a new game', () => {
