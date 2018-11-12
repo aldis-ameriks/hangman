@@ -80,15 +80,10 @@ describe('HangmanClient', () => {
       expect(channelStub).toHaveBeenCalledWith('hangman:game', {});
     });
 
-    it('starts a new game', () => {
-      expect(pushStub).toHaveBeenCalledTimes(1);
-      expect(pushStub).toHaveBeenCalledWith('new_game', {});
-    });
-
     describe('startNewGame', () => {
       it('starts a new game', () => {
         startNewGame();
-        expect(pushStub).toHaveBeenCalledTimes(2);
+        expect(pushStub).toHaveBeenCalledTimes(1);
         expect(pushStub).toHaveBeenLastCalledWith('new_game', {});
       });
     });
@@ -97,7 +92,7 @@ describe('HangmanClient', () => {
       it('makes a move', () => {
         const guess = 'p';
         makeMove(guess);
-        expect(pushStub).toHaveBeenCalledTimes(2);
+        expect(pushStub).toHaveBeenCalledTimes(1);
         expect(pushStub).toHaveBeenLastCalledWith('make_move', { guess });
       });
     });

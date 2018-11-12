@@ -6,7 +6,7 @@ defmodule GameTest do
   test "new_game returns initial structure" do
     game = Game.new_game()
     assert game.turns_left == 7
-    assert game.game_state == :initializing
+    assert game.game_state == :started
     assert length(game.letters) > 0
     assert game.letters |> Enum.all?(fn x -> String.match?(x, ~r/\A[a-z]\z/) end)
   end

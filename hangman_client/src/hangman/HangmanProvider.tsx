@@ -12,9 +12,9 @@ export type GameStatus =
   | 'won';
 
 export type GameState = {
-  letters?: string[];
-  used?: string[];
-  turnsLeft?: number;
+  letters: string[];
+  used: string[];
+  turnsLeft: number;
   status: GameStatus;
 };
 

@@ -20,7 +20,9 @@ const setupChannel = (socket: any, handleResponse: (game: GameState) => void) =>
   channel = socket.channel('hangman:game', {});
   channel
     .join()
-    // .receive('ok', () => {})
+    .receive('ok', () => {
+      handleResponse({ status: 'initializing' } as GameState);
+    })
     .receive('error', (resp: () => void) => {
       throw resp;
     });
@@ -31,7 +33,6 @@ const setupChannel = (socket: any, handleResponse: (game: GameState) => void) =>
 
   channel.on('make_move', convertTallyAndHandleResponse);
   channel.on('new_game', convertTallyAndHandleResponse);
-  channel.push('new_game', {});
 };
 
 export const initializeGame = (url: string, handleResponse: (game: GameState) => void) => {

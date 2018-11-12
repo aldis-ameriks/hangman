@@ -2,7 +2,7 @@ import * as PIXI from 'pixi.js';
 import React, { Component } from 'react';
 
 import { Graphics, Sprite, Stage, Text } from '@inlet/react-pixi';
-import HangmanProvider, { GameState } from './hangman/HangmanProvider';
+import HangmanProvider, { HangmanGame } from './hangman/HangmanProvider';
 
 const noop = () => {
   console.log('noop');
@@ -16,8 +16,8 @@ type State = {
   newGameHovered: boolean;
 };
 
-class Game extends Component<GameState, State> {
-  constructor(props: GameState) {
+class Game extends Component<HangmanGame, State> {
+  constructor(props: HangmanGame) {
     super(props);
     this.state = {
       newGameHovered: false,
@@ -30,6 +30,7 @@ class Game extends Component<GameState, State> {
     let content;
     switch (status) {
       case 'initializing':
+      case 'started':
         content = <Landing onClick={startNewGame} />;
     }
     return (
@@ -41,22 +42,35 @@ class Game extends Component<GameState, State> {
               g.drawRect(0, 0, canvasWidth, canvasHeight);
             }}
           />
-          <Text
-            x={canvasWidth / 2}
-            y={canvasHeight / 2 + 150}
-            anchor={centerAnchorPoint}
-            text={`Game status: ${status}`}
-          />
-          <Text x={canvasWidth / 2} y={canvasHeight / 2 + 180} anchor={centerAnchorPoint} text={letters} />
-          <Text
-            x={canvasWidth / 2}
-            y={canvasHeight / 2 + 220}
-            anchor={centerAnchorPoint}
-            text={`Turns left: ${turnsLeft}`}
-          />
+
           {content}
+          {this.renderState()}
         </Stage>
       </div>
+    );
+  }
+
+  private renderState() {
+    const { letters, turnsLeft, status } = this.props;
+    if (this.props.status === 'initializing') {
+      return null;
+    }
+    return (
+      <>
+        <Text
+          x={canvasWidth / 2}
+          y={canvasHeight / 2 + 150}
+          anchor={centerAnchorPoint}
+          text={`Game status: ${status}`}
+        />
+        <Text x={canvasWidth / 2} y={canvasHeight / 2 + 180} anchor={centerAnchorPoint} text={letters.join(' ')} />
+        <Text
+          x={canvasWidth / 2}
+          y={canvasHeight / 2 + 220}
+          anchor={centerAnchorPoint}
+          text={`Turns left: ${turnsLeft}`}
+        />
+      </>
     );
   }
 }
