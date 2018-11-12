@@ -30,31 +30,7 @@ class Game extends Component<GameState, State> {
     let content;
     switch (status) {
       case 'initializing':
-        content = (
-          <>
-            <Text
-              x={canvasWidth / 2}
-              y={canvasHeight / 2 + 150}
-              anchor={centerAnchorPoint}
-              text={`Game status: ${status}`}
-            />
-            <Text x={canvasWidth / 2} y={canvasHeight / 2 + 180} anchor={centerAnchorPoint} text={letters} />
-            <Text
-              x={canvasWidth / 2}
-              y={canvasHeight / 2 + 220}
-              anchor={centerAnchorPoint}
-              text={`Turns left: ${turnsLeft}`}
-            />
-            <Sprite
-              image={`sprites/sprite_2.png`}
-              x={canvasWidth / 2}
-              y={canvasHeight / 2 - 100}
-              scale={new PIXI.Point(1, 1)}
-              anchor={centerAnchorPoint}
-            />
-            <NewGameButton onClick={startNewGame} />
-          </>
-        );
+        content = <Landing onClick={startNewGame} />;
     }
     return (
       <div style={{ display: 'flex', alignItems: 'center', height: '80vh', justifyContent: 'center' }}>
@@ -65,6 +41,19 @@ class Game extends Component<GameState, State> {
               g.drawRect(0, 0, canvasWidth, canvasHeight);
             }}
           />
+          <Text
+            x={canvasWidth / 2}
+            y={canvasHeight / 2 + 150}
+            anchor={centerAnchorPoint}
+            text={`Game status: ${status}`}
+          />
+          <Text x={canvasWidth / 2} y={canvasHeight / 2 + 180} anchor={centerAnchorPoint} text={letters} />
+          <Text
+            x={canvasWidth / 2}
+            y={canvasHeight / 2 + 220}
+            anchor={centerAnchorPoint}
+            text={`Turns left: ${turnsLeft}`}
+          />
           {content}
         </Stage>
       </div>
@@ -72,11 +61,11 @@ class Game extends Component<GameState, State> {
   }
 }
 
-type NewGameButtonProps = { onClick: () => void };
-type NewGameButtonState = { newGameHovered: boolean };
+type LandingProps = { onClick: () => void };
+type LandingState = { newGameHovered: boolean };
 
-class NewGameButton extends React.Component<NewGameButtonProps, NewGameButtonState> {
-  constructor(props: NewGameButtonProps) {
+class Landing extends React.Component<LandingProps, LandingState> {
+  constructor(props: LandingProps) {
     super(props);
     this.state = { newGameHovered: false };
   }
@@ -86,6 +75,13 @@ class NewGameButton extends React.Component<NewGameButtonProps, NewGameButtonSta
 
     return (
       <>
+        <Sprite
+          image={`sprites/sprite_2.png`}
+          x={canvasWidth / 2}
+          y={canvasHeight / 2 - 100}
+          scale={new PIXI.Point(1, 1)}
+          anchor={centerAnchorPoint}
+        />
         <Sprite
           image={`sprites/${newGameButtonImg}.png`}
           x={canvasWidth / 2}
