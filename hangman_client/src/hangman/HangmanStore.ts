@@ -10,8 +10,8 @@ export type HangmanNotification = {
 const notifications: { [key: string]: HangmanNotification } = {
   good_guess: { type: 'info', message: 'Lucky.' },
   bad_guess: { type: 'warning', message: 'One step closer to your demise.' },
-  invalid_guess: { type: 'warning', message: 'Your negligence disgusts me.' },
-  already_used: { type: 'info', message: 'Your negligence disgusts me.' },
+  invalid_guess: { type: 'warning', message: "That's not a valid guess." },
+  already_used: { type: 'info', message: 'You already guessed that.' },
   lost: { type: 'error', message: 'Figures.' },
   won: { type: 'success', message: 'You may live another day.' },
 };
