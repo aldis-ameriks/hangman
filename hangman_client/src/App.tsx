@@ -49,11 +49,11 @@ const HangmanGame: React.FunctionComponent<HangmanGameProps> = ({
       <Gallows />
     </Grid>
     <Grid item={true} sm={6} xs={12}>
-      <GameState letters={letters} notification={notification} turnsLeft={turnsLeft} used={used} />
+      <GameState letters={letters} notification={notification} turnsLeft={turnsLeft} />
       {isGameOver ? (
         <NewGameButton classes={classes} startNewGame={startNewGame} />
       ) : (
-        <GameInput makeMove={makeMove} classes={classes} />
+        <GameInput makeMove={makeMove} used={used} />
       )}
     </Grid>
   </Grid>

@@ -4,7 +4,6 @@ import { NotificationType } from '../components/Notification';
 import GameState from './GameState';
 
 describe('GameState', () => {
-  const used = 'used';
   const letters = 'letters';
   const turnsLeft = 2;
   const notification = { type: 'error' as NotificationType, message: 'msg' };
@@ -13,12 +12,7 @@ describe('GameState', () => {
   describe('when notification is given', () => {
     beforeEach(() => {
       container = render(
-        <GameState
-          notification={notification}
-          used={used}
-          turnsLeft={turnsLeft}
-          letters={letters}
-        />,
+        <GameState notification={notification} turnsLeft={turnsLeft} letters={letters} />,
       ).container;
     });
 
@@ -26,14 +20,13 @@ describe('GameState', () => {
       expect(container).toHaveTextContent(notification.message);
       expect(container).toHaveTextContent(`Turns left: ${turnsLeft}`);
       expect(container).toHaveTextContent(`Letters: ${letters}`);
-      expect(container).toHaveTextContent(`Used: ${used}`);
     });
   });
 
   describe('when notification is not given', () => {
     beforeEach(() => {
       container = render(
-        <GameState notification={undefined} used={used} turnsLeft={turnsLeft} letters={letters} />,
+        <GameState notification={undefined} turnsLeft={turnsLeft} letters={letters} />,
       ).container;
     });
 
@@ -41,7 +34,6 @@ describe('GameState', () => {
       expect(container).not.toHaveTextContent(notification.message);
       expect(container).toHaveTextContent(`Turns left: ${turnsLeft}`);
       expect(container).toHaveTextContent(`Letters: ${letters}`);
-      expect(container).toHaveTextContent(`Used: ${used}`);
     });
   });
 });

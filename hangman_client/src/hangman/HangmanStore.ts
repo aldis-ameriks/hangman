@@ -18,7 +18,7 @@ const notifications: { [key: string]: HangmanNotification } = {
 
 export type HangmanGameState = {
   letters: string;
-  used: string;
+  used: string[];
   turnsLeft: number;
   isGameOver: boolean;
   notification?: HangmanNotification;
@@ -58,7 +58,7 @@ class HangmanStore {
 
   @computed
   get used() {
-    return this.game.used && this.game.used.join(' ');
+    return this.game.used;
   }
 
   @action

@@ -36,7 +36,7 @@ describe('HangmanStore', () => {
           () => hangmanStore.gameState === 'initializing',
           () => {
             expect(hangmanStore.letters).toBe('a b');
-            expect(hangmanStore.used).toBe('c d');
+            expect(hangmanStore.used).toEqual(['c', 'd']);
             expect(hangmanStore.turnsLeft).toBe(1);
             expect(hangmanStore.notification).toBeUndefined();
             expect(hangmanStore.isGameOver).toBeFalsy();

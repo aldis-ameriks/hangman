@@ -1,11 +1,11 @@
 import React from 'react';
-import { fireEvent, render, RenderResult } from 'react-testing-library';
+import { fireEvent, render, RenderResult, wait } from 'react-testing-library';
 import GameInput from './GameInput';
 
 describe('GameInput', () => {
   let makeMove: (guess: string) => void;
   let component: RenderResult;
-  const renderComponent = () => render(<GameInput makeMove={makeMove} classes={{}} />);
+  const renderComponent = () => render(<GameInput makeMove={makeMove} used={[]} />);
 
   beforeEach(() => {
     makeMove = jest.fn();
@@ -18,35 +18,22 @@ describe('GameInput', () => {
 
     it('makeMove has not been called', () => {
       expect(makeMove).not.toHaveBeenCalled();
-      const input = component.getByTestId('guess');
-      expect(input).toHaveAttribute('value', '');
-    });
-  });
-
-  describe('after inputting', () => {
-    let input: HTMLElement;
-
-    beforeEach(() => {
-      component = renderComponent();
-      input = component.getByTestId('guess');
-      fireEvent.change(input, {
-        target: { value: 'c' },
-      });
     });
 
-    it('updates input', () => {
-      expect(input).toHaveAttribute('value', 'c');
-    });
-
-    describe('and clicking submit', () => {
+    describe('after clicking a button', () => {
       beforeEach(() => {
-        const button = component.getByText('Test your luck');
-        fireEvent.click(button);
+        const letter = component.getByText('a');
+        fireEvent.click(letter);
       });
 
-      it('clears input and calls makeMove', () => {
-        expect(makeMove).toHaveBeenCalledWith('c');
-        expect(input).toHaveAttribute('value', '');
+      it('makeMove is executed', () => {
+        expect(makeMove).toHaveBeenCalledWith('a');
+      });
+
+      it('same letter is disabled', () => {
+        wait(() => {
+          expect(component.getByText('a')).toHaveStyle('cursor: not-allowed');
+        });
       });
     });
   });

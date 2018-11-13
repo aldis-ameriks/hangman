@@ -29,7 +29,7 @@ describe('App', () => {
     it('renders the game', async () => {
       const hangmanStore = new HangmanStore();
       const component = render(<App hangmanStore={hangmanStore} />);
-      const gameTitle = component.getByText('Enter your best guess below.');
+      const gameTitle = component.getByTestId('game-input');
       await waitForElement(() => gameTitle);
       expect(gameTitle).toBeInTheDocument();
     });

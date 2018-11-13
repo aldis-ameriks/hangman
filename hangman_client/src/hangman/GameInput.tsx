@@ -1,58 +1,47 @@
-import Button from '@material-ui/core/Button/Button';
-import TextField from '@material-ui/core/TextField/TextField';
-import Typography from '@material-ui/core/Typography/Typography';
+import Paper from '@material-ui/core/Paper/Paper';
 import React from 'react';
 
 type Props = {
   makeMove: (guess: string) => void;
-  classes: any;
+  used: string[];
 };
 
-type State = {
-  guess: string;
+const letters = 'abcdefghijklmnopqrstuvwxyz'.split('');
+
+const GameInput: React.FunctionComponent<Props> = ({ makeMove, used }) => {
+  return (
+    <div data-testid="game-input">
+      {letters.map(letter => (
+        <Letter makeMove={makeMove} used={used} letter={letter} key={letter} />
+      ))}
+    </div>
+  );
 };
 
-class GameInput extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = { guess: '' };
-  }
-
-  public render() {
-    const { classes, makeMove } = this.props;
-    const { guess } = this.state;
-
-    const handleSubmit = (e: React.FormEvent) => {
-      e.preventDefault();
-      this.setState({ guess: '' }, () => {
-        makeMove(guess);
-      });
-    };
-
-    return (
-      <form>
-        <Typography variant="headline" className={classes.title}>
-          Enter your best guess below.
-        </Typography>
-        <TextField
-          inputProps={{ maxLength: 1, 'data-testid': 'guess' }}
-          value={guess}
-          onChange={(e: React.ChangeEvent<{ value: string }>) =>
-            this.setState({ guess: e.target.value })
-          }
-        />
-        <Button
-          type="submit"
-          variant="contained"
-          color="secondary"
-          className={classes.button}
-          onClick={handleSubmit}
-        >
-          Test your luck
-        </Button>
-      </form>
-    );
-  }
-}
+type LetterProps = {
+  letter: string;
+  makeMove: (guess: string) => void;
+  used: string[];
+};
+const Letter: React.FunctionComponent<LetterProps> = ({ letter, makeMove, used }) => {
+  const isDisabled = used.includes(letter);
+  return (
+    <Paper
+      style={{
+        display: 'inline-block',
+        padding: '10px',
+        margin: '10px',
+        width: '35px',
+        height: '40px',
+        textAlign: 'center',
+        cursor: isDisabled ? 'not-allowed' : 'pointer',
+        backgroundColor: isDisabled ? 'gray' : 'white',
+      }}
+      onClick={() => makeMove(letter)}
+    >
+      {letter}
+    </Paper>
+  );
+};
 
 export default GameInput;
