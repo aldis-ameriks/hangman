@@ -12,8 +12,14 @@ describe('GameState', () => {
 
   describe('when notification is given', () => {
     beforeEach(() => {
-      container = render(<GameState notification={notification} used={used} turnsLeft={turnsLeft} letters={letters} />)
-        .container;
+      container = render(
+        <GameState
+          notification={notification}
+          used={used}
+          turnsLeft={turnsLeft}
+          letters={letters}
+        />,
+      ).container;
     });
 
     it('renders expected content', () => {
@@ -26,8 +32,9 @@ describe('GameState', () => {
 
   describe('when notification is not given', () => {
     beforeEach(() => {
-      container = render(<GameState notification={undefined} used={used} turnsLeft={turnsLeft} letters={letters} />)
-        .container;
+      container = render(
+        <GameState notification={undefined} used={used} turnsLeft={turnsLeft} letters={letters} />,
+      ).container;
     });
 
     it('renders expected content', () => {

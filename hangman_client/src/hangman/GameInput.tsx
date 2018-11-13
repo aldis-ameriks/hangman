@@ -37,9 +37,17 @@ class GameInput extends React.Component<Props, State> {
         <TextField
           inputProps={{ maxLength: 1, 'data-testid': 'guess' }}
           value={guess}
-          onChange={(e: React.ChangeEvent<{ value: string }>) => this.setState({ guess: e.target.value })}
+          onChange={(e: React.ChangeEvent<{ value: string }>) =>
+            this.setState({ guess: e.target.value })
+          }
         />
-        <Button type="submit" variant="contained" color="secondary" className={classes.button} onClick={handleSubmit}>
+        <Button
+          type="submit"
+          variant="contained"
+          color="secondary"
+          className={classes.button}
+          onClick={handleSubmit}
+        >
           Test your luck
         </Button>
       </form>

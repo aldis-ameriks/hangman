@@ -7,7 +7,13 @@ type Props = {
 };
 
 const NewGameButton: React.FunctionComponent<Props> = ({ classes, startNewGame }) => (
-  <Button type="button" variant="contained" color="secondary" className={classes.button} onClick={startNewGame}>
+  <Button
+    type="button"
+    variant="contained"
+    color="secondary"
+    className={classes.button}
+    onClick={startNewGame}
+  >
     Start new game
   </Button>
 );

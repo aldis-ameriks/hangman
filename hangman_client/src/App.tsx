@@ -76,7 +76,15 @@ class App extends Component<{ classes: any; hangmanStore: HangmanStore }> {
       return <CircularProgress style={{ display: 'block', margin: 'auto' }} />;
     }
 
-    const { notification, makeMove, startNewGame, isGameOver, letters, used, turnsLeft } = hangmanStore;
+    const {
+      notification,
+      makeMove,
+      startNewGame,
+      isGameOver,
+      letters,
+      used,
+      turnsLeft,
+    } = hangmanStore;
     return (
       <>
         <NavigationBar />
