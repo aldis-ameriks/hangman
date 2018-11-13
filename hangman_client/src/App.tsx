@@ -23,9 +23,6 @@ const styles = (theme: any) => ({
     padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
     margin: `${theme.spacing.unit * 2}px`,
   },
-  title: {
-    marginTop: theme.spacing.unit * 2,
-  },
   button: {
     marginTop: theme.spacing.unit * 4,
     display: 'block',
