@@ -6,6 +6,7 @@ describe('GameInput', () => {
   let makeMove: (guess: string) => void;
   let component: RenderResult;
   const renderComponent = () => render(<GameInput makeMove={makeMove} used={[]} />);
+  const letter = 'a';
 
   beforeEach(() => {
     makeMove = jest.fn();
@@ -20,19 +21,24 @@ describe('GameInput', () => {
       expect(makeMove).not.toHaveBeenCalled();
     });
 
+    it('letter is not disabled', () => {
+      wait(() => {
+        expect(component.getByText(letter)).toHaveStyle('cursor: pointer');
+      });
+    });
+
     describe('after clicking a button', () => {
       beforeEach(() => {
-        const letter = component.getByText('a');
-        fireEvent.click(letter);
+        fireEvent.click(component.getByText(letter));
       });
 
       it('makeMove is executed', () => {
-        expect(makeMove).toHaveBeenCalledWith('a');
+        expect(makeMove).toHaveBeenCalledWith(letter);
       });
 
-      it('same letter is disabled', () => {
+      it('letter is disabled', () => {
         wait(() => {
-          expect(component.getByText('a')).toHaveStyle('cursor: not-allowed');
+          expect(component.getByText(letter)).toHaveStyle('cursor: not-allowed');
         });
       });
     });
