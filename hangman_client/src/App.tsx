@@ -1,13 +1,15 @@
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
-import React from 'react';
+import React, { Component } from 'react';
 
+import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress';
+import { inject, observer } from 'mobx-react';
 import { ReactComponent as Gallows } from './components/gallows.svg';
 import NavigationBar from './components/NavigationBar';
 import GameInput from './hangman/GameInput';
 import GameState from './hangman/GameState';
-import HangmanProvider, { HangmanGameState } from './hangman/HangmanProvider';
+import HangmanStore, { HangmanGameState } from './hangman/HangmanStore';
 import NewGameButton from './hangman/NewGameButton';
 
 const styles = (theme: any) => ({
@@ -61,15 +63,40 @@ HangmanGame.defaultProps = {
   notification: undefined,
 };
 
-const App: React.FunctionComponent<{ classes: any }> = ({ classes }) => (
-  <>
-    <NavigationBar />
-    <main className={classes.layout}>
-      <Paper className={classes.paper}>
-        <HangmanProvider render={gameState => <HangmanGame classes={classes} {...gameState} />} />
-      </Paper>
-    </main>
-  </>
-);
+@inject('hangmanStore')
+@observer
+class App extends Component<{ classes: any; hangmanStore: HangmanStore }> {
+  public componentDidMount() {
+    this.props.hangmanStore.initializeGame();
+  }
+
+  public render() {
+    const { classes, hangmanStore } = this.props;
+    if (hangmanStore.gameState === 'loading') {
+      return <CircularProgress style={{ display: 'block', margin: 'auto' }} />;
+    }
+
+    const { notification, makeMove, startNewGame, isGameOver, letters, used, turnsLeft } = hangmanStore;
+    return (
+      <>
+        <NavigationBar />
+        <main className={classes.layout}>
+          <Paper className={classes.paper}>
+            <HangmanGame
+              classes={classes}
+              letters={letters}
+              isGameOver={isGameOver}
+              makeMove={makeMove}
+              notification={notification}
+              startNewGame={startNewGame}
+              turnsLeft={turnsLeft}
+              used={used}
+            />
+          </Paper>
+        </main>
+      </>
+    );
+  }
+}
 
 export default withStyles(styles)(App);

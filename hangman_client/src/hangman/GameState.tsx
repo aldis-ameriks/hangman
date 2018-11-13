@@ -1,6 +1,6 @@
 import React from 'react';
 import Notification from '../components/Notification';
-import { HangmanNotification } from './HangmanProvider';
+import { HangmanNotification } from './HangmanStore';
 
 type Props = {
   notification?: HangmanNotification;

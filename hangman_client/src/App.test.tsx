@@ -2,6 +2,7 @@ import React from 'react';
 import { render, waitForElement } from 'react-testing-library';
 import App from './App';
 import * as HangmanClient from './hangman/HangmanClient';
+import HangmanStore from './hangman/HangmanStore';
 
 jest.mock('./hangman/HangmanClient');
 
@@ -10,7 +11,8 @@ describe('App', () => {
 
   describe('initially', () => {
     it('renders loader', () => {
-      const component = render(<App />);
+      const hangmanStore = new HangmanStore();
+      const component = render(<App hangmanStore={hangmanStore} />);
       expect(component.queryByRole('progressbar')).toBeInTheDocument();
     });
   });
@@ -25,7 +27,8 @@ describe('App', () => {
     });
 
     it('renders the game', async () => {
-      const component = render(<App />);
+      const hangmanStore = new HangmanStore();
+      const component = render(<App hangmanStore={hangmanStore} />);
       const gameTitle = component.getByText('Enter your best guess below.');
       await waitForElement(() => gameTitle);
       expect(gameTitle).toBeInTheDocument();
@@ -42,7 +45,8 @@ describe('App', () => {
     });
 
     it('renders button to start new game', async () => {
-      const component = render(<App />);
+      const hangmanStore = new HangmanStore();
+      const component = render(<App hangmanStore={hangmanStore} />);
       const newGameButton = component.getByText('Start new game');
       await waitForElement(() => newGameButton);
       expect(newGameButton).toBeInTheDocument();
