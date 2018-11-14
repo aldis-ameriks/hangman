@@ -7,7 +7,7 @@ const NavigationBar = () => (
   <AppBar position="static" color="default">
     <Toolbar>
       <Typography variant="title" color="inherit">
-        Hangyman
+        Hangman
       </Typography>
     </Toolbar>
   </AppBar>
