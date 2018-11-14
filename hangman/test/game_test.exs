@@ -18,6 +18,11 @@ defmodule GameTest do
     end
   end
 
+  test "letters are revealed upon losing game" do
+    tally = Game.new_game("foo") |> Map.put(:game_state, :lost) |> Game.tally
+    assert tally.letters == ["f", "o", "o"]
+  end
+
   test "first occurence of letter is not alrady used" do
     {game, _tally} = Game.new_game() |> Game.make_move("x")
     assert game.game_state != :already_used
