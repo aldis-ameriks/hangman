@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-
 import { inject, observer } from 'mobx-react';
+import React, { Component } from 'react';
 import GameInput from './hangman/GameInput';
 import GameState from './hangman/GameState';
 import HangmanStore from './hangman/HangmanStore';
