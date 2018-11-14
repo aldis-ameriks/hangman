@@ -5,6 +5,7 @@ import GameInput from './hangman/GameInput';
 import GameState from './hangman/GameState';
 import HangmanStore from './hangman/HangmanStore';
 import NewGameButton from './hangman/NewGameButton';
+import Typewriter from './hangman/Typewriter';
 
 @inject('hangmanStore')
 @observer
@@ -44,7 +45,7 @@ class App extends Component<{ hangmanStore: HangmanStore }> {
           </div>
         </div>
         <div className="container">
-          <h1>Welcome to the Hangman game</h1>
+          <Typewriter text="Welcome to Hangman" interval={100} render={text => <h1>{text}</h1>} />
         </div>
         <hr />
         <div className="container game-container">
