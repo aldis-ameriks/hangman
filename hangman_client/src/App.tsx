@@ -6,7 +6,6 @@ import React, { Component } from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress';
 import { inject, observer } from 'mobx-react';
 import { ReactComponent as Gallows } from './components/gallows.svg';
-import NavigationBar from './components/NavigationBar';
 import GameInput from './hangman/GameInput';
 import GameState from './hangman/GameState';
 import HangmanStore, { HangmanGameState } from './hangman/HangmanStore';
@@ -83,23 +82,20 @@ class App extends Component<{ classes: any; hangmanStore: HangmanStore }> {
       turnsLeft,
     } = hangmanStore;
     return (
-      <>
-        <NavigationBar />
-        <main className={classes.layout}>
-          <Paper className={classes.paper}>
-            <HangmanGame
-              classes={classes}
-              letters={letters}
-              isGameOver={isGameOver}
-              makeMove={makeMove}
-              notification={notification}
-              startNewGame={startNewGame}
-              turnsLeft={turnsLeft}
-              used={used}
-            />
-          </Paper>
-        </main>
-      </>
+      <main className={classes.layout}>
+        <Paper className={classes.paper}>
+          <HangmanGame
+            classes={classes}
+            letters={letters}
+            isGameOver={isGameOver}
+            makeMove={makeMove}
+            notification={notification}
+            startNewGame={startNewGame}
+            turnsLeft={turnsLeft}
+            used={used}
+          />
+        </Paper>
+      </main>
     );
   }
 }
