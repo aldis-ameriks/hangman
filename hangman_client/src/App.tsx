@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import { inject, observer } from 'mobx-react';
-import { ReactComponent as Gallows } from './components/gallows.svg';
 import GameInput from './hangman/GameInput';
 import GameState from './hangman/GameState';
 import HangmanStore from './hangman/HangmanStore';
@@ -12,6 +11,10 @@ import NewGameButton from './hangman/NewGameButton';
 class App extends Component<{ hangmanStore: HangmanStore }> {
   public componentDidMount() {
     this.props.hangmanStore.initializeGame();
+  }
+
+  public componentDidUpdate() {
+    this.renderGallows();
   }
 
   public render() {
@@ -47,7 +50,9 @@ class App extends Component<{ hangmanStore: HangmanStore }> {
         <div className="container game-container">
           <div className="row">
             <div className="span6">
-              <Gallows />
+              <canvas id="gallows" height="504px" width="400px">
+                Canvas is not supported ;-(
+              </canvas>
             </div>
             <div className="span6">
               <GameState letters={letters} notification={notification} turnsLeft={turnsLeft} />
@@ -61,6 +66,95 @@ class App extends Component<{ hangmanStore: HangmanStore }> {
         </div>
       </>
     );
+  }
+
+  private renderGallows() {
+    const { turnsLeft } = this.props.hangmanStore;
+    // @ts-ignore
+    const canvas = document.getElementById('gallows');
+    // @ts-ignore
+    const ctx = canvas.getContext('2d');
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 4;
+
+    switch (turnsLeft) {
+      case 7: {
+        ctx.beginPath();
+        ctx.clearRect(0, 0, 400, 504);
+        ctx.stroke();
+
+        ctx.moveTo(350, 450);
+        ctx.lineTo(50, 450);
+        ctx.lineTo(50, 50);
+        ctx.lineTo(200, 50);
+        ctx.stroke();
+        break;
+      }
+      case 6: {
+        ctx.beginPath();
+        ctx.moveTo(200, 50);
+        ctx.lineTo(200, 100);
+        ctx.stroke();
+        break;
+      }
+      case 5: {
+        ctx.beginPath();
+        ctx.moveTo(200, 100);
+        ctx.arc(200, 150, 30, 1.5 * Math.PI, -0.5 * Math.PI, true);
+        ctx.stroke();
+        break;
+      }
+      case 4: {
+        ctx.beginPath();
+        ctx.moveTo(200, 180);
+        ctx.lineTo(200, 300);
+        ctx.stroke();
+        break;
+      }
+      case 3: {
+        ctx.beginPath();
+        ctx.moveTo(200, 200);
+        ctx.lineTo(150, 250);
+        ctx.stroke();
+        break;
+      }
+      case 2: {
+        ctx.beginPath();
+        ctx.moveTo(200, 200);
+        ctx.lineTo(250, 250);
+        ctx.stroke();
+        break;
+      }
+      case 1: {
+        ctx.beginPath();
+        ctx.moveTo(200, 300);
+        ctx.lineTo(150, 350);
+        ctx.stroke();
+        break;
+      }
+      case 0: {
+        ctx.beginPath();
+        ctx.moveTo(200, 300);
+        ctx.lineTo(250, 350);
+
+        ctx.moveTo(190, 140);
+        ctx.lineTo(195, 145);
+        ctx.moveTo(195, 140);
+        ctx.lineTo(190, 145);
+
+        ctx.moveTo(210, 140);
+        ctx.lineTo(215, 145);
+        ctx.moveTo(215, 140);
+        ctx.lineTo(210, 145);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(200, 170, 14, -0.15 * Math.PI, -0.85 * Math.PI, true);
+        ctx.stroke();
+
+        break;
+      }
+    }
   }
 }
 
