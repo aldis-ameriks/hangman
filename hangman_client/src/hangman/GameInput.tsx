@@ -34,7 +34,8 @@ const Letter: React.FunctionComponent<LetterProps> = ({ letter, makeMove, used }
         height: '40px',
         textAlign: 'center',
         cursor: isDisabled ? 'not-allowed' : 'pointer',
-        backgroundColor: isDisabled ? 'gray' : 'white',
+        color: isDisabled ? '#757575' : 'white',
+        border: '1px solid',
       }}
       className="well"
       onClick={() => makeMove(letter)}

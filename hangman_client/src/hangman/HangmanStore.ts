@@ -16,16 +16,6 @@ const notifications: { [key: string]: HangmanNotification } = {
   won: { type: 'warning', message: 'You may live another day.' },
 };
 
-export type HangmanGameState = {
-  letters: string;
-  used: string[];
-  turnsLeft: number;
-  isGameOver: boolean;
-  notification?: HangmanNotification;
-  startNewGame: () => void;
-  makeMove: (guess: string) => void;
-};
-
 class HangmanStore {
   @observable
   public game: HangmanGameTally = { game_state: 'loading' } as HangmanGameTally;

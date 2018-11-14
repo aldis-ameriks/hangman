@@ -4,36 +4,8 @@ import { inject, observer } from 'mobx-react';
 import { ReactComponent as Gallows } from './components/gallows.svg';
 import GameInput from './hangman/GameInput';
 import GameState from './hangman/GameState';
-import HangmanStore, { HangmanGameState } from './hangman/HangmanStore';
+import HangmanStore from './hangman/HangmanStore';
 import NewGameButton from './hangman/NewGameButton';
-
-const HangmanGame: React.FunctionComponent<HangmanGameState> = ({
-  letters,
-  notification,
-  turnsLeft,
-  used,
-  isGameOver,
-  startNewGame,
-  makeMove,
-}) => (
-  <div className="row">
-    <div className="span6">
-      <Gallows />
-    </div>
-    <div className="span6">
-      <GameState letters={letters} notification={notification} turnsLeft={turnsLeft} />
-      {isGameOver ? (
-        <NewGameButton startNewGame={startNewGame} />
-      ) : (
-        <GameInput makeMove={makeMove} used={used} />
-      )}
-    </div>
-  </div>
-);
-
-HangmanGame.defaultProps = {
-  notification: undefined,
-};
 
 @inject('hangmanStore')
 @observer
@@ -73,15 +45,19 @@ class App extends Component<{ hangmanStore: HangmanStore }> {
         </div>
         <hr />
         <div className="container game-container">
-          <HangmanGame
-            letters={letters}
-            isGameOver={isGameOver}
-            makeMove={makeMove}
-            notification={notification}
-            startNewGame={startNewGame}
-            turnsLeft={turnsLeft}
-            used={used}
-          />
+          <div className="row">
+            <div className="span6">
+              <Gallows />
+            </div>
+            <div className="span6">
+              <GameState letters={letters} notification={notification} turnsLeft={turnsLeft} />
+              {isGameOver ? (
+                <NewGameButton startNewGame={startNewGame} />
+              ) : (
+                <GameInput makeMove={makeMove} used={used} />
+              )}
+            </div>
+          </div>
         </div>
       </>
     );
