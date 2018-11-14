@@ -1,21 +1,13 @@
-import Button from '@material-ui/core/Button/Button';
 import React from 'react';
 
 type Props = {
-  classes: any;
   startNewGame: () => void;
 };
 
-const NewGameButton: React.FunctionComponent<Props> = ({ classes, startNewGame }) => (
-  <Button
-    type="button"
-    variant="contained"
-    color="secondary"
-    className={classes.button}
-    onClick={startNewGame}
-  >
+const NewGameButton: React.FunctionComponent<Props> = ({ startNewGame }) => (
+  <button className="btn btn-large btn-primary" type="button" onClick={startNewGame}>
     Start new game
-  </Button>
+  </button>
 );
 
 export default NewGameButton;

@@ -1,4 +1,3 @@
-import CssBaseline from '@material-ui/core/CssBaseline';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -14,10 +13,7 @@ const renderApp = () => {
 };
 
 ReactDOM.render(
-  <>
-    <CssBaseline />
-    <Provider hangmanStore={hangmanStore}>{renderApp()}</Provider>
-  </>,
+  <Provider hangmanStore={hangmanStore}>{renderApp()}</Provider>,
   document.getElementById('root'),
 );
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import Notification from '../components/Notification';
 import { HangmanNotification } from './HangmanStore';
 
 type Props = {
@@ -11,7 +10,7 @@ type Props = {
 const GameState: React.FunctionComponent<Props> = ({ notification, turnsLeft, letters }) => (
   <>
     {notification && (
-      <Notification variant={notification.type}>{notification.message}</Notification>
+      <div className={`alert alert-${notification.type}`}>{notification.message}</div>
     )}
     <p>Turns left: {turnsLeft}</p>
     <p>Letters: {letters}</p>

@@ -13,7 +13,7 @@ describe('App', () => {
     it('renders loader', () => {
       const hangmanStore = new HangmanStore();
       const component = render(<App hangmanStore={hangmanStore} />);
-      expect(component.queryByRole('progressbar')).toBeInTheDocument();
+      expect(component.queryByTestId('game-input')).toBeNull();
     });
   });
 

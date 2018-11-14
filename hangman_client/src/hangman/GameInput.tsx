@@ -1,4 +1,3 @@
-import Paper from '@material-ui/core/Paper/Paper';
 import React from 'react';
 
 type Props = {
@@ -26,7 +25,7 @@ type LetterProps = {
 const Letter: React.FunctionComponent<LetterProps> = ({ letter, makeMove, used }) => {
   const isDisabled = used.includes(letter);
   return (
-    <Paper
+    <div
       style={{
         display: 'inline-block',
         padding: '10px',
@@ -37,10 +36,11 @@ const Letter: React.FunctionComponent<LetterProps> = ({ letter, makeMove, used }
         cursor: isDisabled ? 'not-allowed' : 'pointer',
         backgroundColor: isDisabled ? 'gray' : 'white',
       }}
+      className="well"
       onClick={() => makeMove(letter)}
     >
       {letter}
-    </Paper>
+    </div>
   );
 };
 

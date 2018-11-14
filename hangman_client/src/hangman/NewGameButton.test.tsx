@@ -4,7 +4,7 @@ import NewGameButton from './NewGameButton';
 
 describe('NewGameButton', () => {
   let startNewGame: () => void;
-  const wrapper = () => render(<NewGameButton classes={{}} startNewGame={startNewGame} />);
+  const wrapper = () => render(<NewGameButton startNewGame={startNewGame} />);
 
   beforeEach(() => {
     startNewGame = jest.fn();

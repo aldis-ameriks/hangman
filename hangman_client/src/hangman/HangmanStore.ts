@@ -1,20 +1,19 @@
 import { action, computed, observable } from 'mobx';
-import { NotificationType } from '../components/Notification';
 import { HangmanGameTally, initializeGame, makeMove, startNewGame } from './HangmanClient';
 
 export type HangmanNotification = {
-  type: NotificationType;
+  type: string;
   message: string;
 };
 
 const notifications: { [key: string]: HangmanNotification } = {
-  good_guess: { type: 'info', message: 'Lucky.' },
+  good_guess: { type: 'warning', message: 'Lucky.' },
   bad_guess: { type: 'warning', message: 'One step closer to your demise.' },
   invalid_guess: { type: 'warning', message: "That's not a valid guess." },
-  already_used: { type: 'info', message: 'You already guessed that.' },
-  initializing: { type: 'info', message: 'Make your move.' },
-  lost: { type: 'error', message: 'Oh no... try again?.' },
-  won: { type: 'success', message: 'You may live another day.' },
+  already_used: { type: 'warning', message: 'You already guessed that.' },
+  initializing: { type: 'warning', message: 'Make your move.' },
+  lost: { type: 'error', message: 'Oh no... try again?' },
+  won: { type: 'warning', message: 'You may live another day.' },
 };
 
 export type HangmanGameState = {

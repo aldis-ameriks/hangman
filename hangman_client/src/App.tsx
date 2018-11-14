@@ -1,9 +1,5 @@
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import { withStyles } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 
-import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress';
 import { inject, observer } from 'mobx-react';
 import { ReactComponent as Gallows } from './components/gallows.svg';
 import GameInput from './hangman/GameInput';
@@ -11,48 +7,28 @@ import GameState from './hangman/GameState';
 import HangmanStore, { HangmanGameState } from './hangman/HangmanStore';
 import NewGameButton from './hangman/NewGameButton';
 
-const styles = (theme: any) => ({
-  layout: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginTop: theme.spacing.unit * 4,
-    maxWidth: 1000,
-  },
-  paper: {
-    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
-    margin: `${theme.spacing.unit * 2}px`,
-  },
-  button: {
-    marginTop: theme.spacing.unit * 4,
-    display: 'block',
-  },
-});
-
-type HangmanGameProps = HangmanGameState & { classes: any };
-
-const HangmanGame: React.FunctionComponent<HangmanGameProps> = ({
+const HangmanGame: React.FunctionComponent<HangmanGameState> = ({
   letters,
   notification,
   turnsLeft,
   used,
   isGameOver,
-  classes,
   startNewGame,
   makeMove,
 }) => (
-  <Grid container={true} spacing={40}>
-    <Grid item={true} sm={6} xs={12}>
+  <div className="row">
+    <div className="span6">
       <Gallows />
-    </Grid>
-    <Grid item={true} sm={6} xs={12}>
+    </div>
+    <div className="span6">
       <GameState letters={letters} notification={notification} turnsLeft={turnsLeft} />
       {isGameOver ? (
-        <NewGameButton classes={classes} startNewGame={startNewGame} />
+        <NewGameButton startNewGame={startNewGame} />
       ) : (
         <GameInput makeMove={makeMove} used={used} />
       )}
-    </Grid>
-  </Grid>
+    </div>
+  </div>
 );
 
 HangmanGame.defaultProps = {
@@ -61,15 +37,15 @@ HangmanGame.defaultProps = {
 
 @inject('hangmanStore')
 @observer
-class App extends Component<{ classes: any; hangmanStore: HangmanStore }> {
+class App extends Component<{ hangmanStore: HangmanStore }> {
   public componentDidMount() {
     this.props.hangmanStore.initializeGame();
   }
 
   public render() {
-    const { classes, hangmanStore } = this.props;
+    const { hangmanStore } = this.props;
     if (hangmanStore.gameState === 'loading') {
-      return <CircularProgress style={{ display: 'block', margin: 'auto' }} />;
+      return null;
     }
 
     const {
@@ -82,10 +58,22 @@ class App extends Component<{ classes: any; hangmanStore: HangmanStore }> {
       turnsLeft,
     } = hangmanStore;
     return (
-      <main className={classes.layout}>
-        <Paper className={classes.paper}>
+      <>
+        <div className="navbar navbar-inverse navbar-fixed-top">
+          <div className="navbar-inner">
+            <div className="container">
+              <a className="brand" href="#">
+                Hangman
+              </a>
+            </div>
+          </div>
+        </div>
+        <div className="container">
+          <h1>Welcome to the Hangman game</h1>
+        </div>
+        <hr />
+        <div className="container game-container">
           <HangmanGame
-            classes={classes}
             letters={letters}
             isGameOver={isGameOver}
             makeMove={makeMove}
@@ -94,10 +82,10 @@ class App extends Component<{ classes: any; hangmanStore: HangmanStore }> {
             turnsLeft={turnsLeft}
             used={used}
           />
-        </Paper>
-      </main>
+        </div>
+      </>
     );
   }
 }
 
-export default withStyles(styles)(App);
+export default App;
