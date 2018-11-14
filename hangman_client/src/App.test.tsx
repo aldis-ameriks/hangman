@@ -8,6 +8,15 @@ jest.mock('./hangman/HangmanClient');
 
 describe('App', () => {
   let initializeGame;
+  // @ts-ignore
+  HTMLCanvasElement.prototype.getContext = () => ({
+    beginPath: jest.fn(),
+    clearRect: jest.fn(),
+    stroke: jest.fn(),
+    moveTo: jest.fn(),
+    lineTo: jest.fn(),
+    arc: jest.fn(),
+  });
 
   describe('initially', () => {
     it('renders loader', () => {

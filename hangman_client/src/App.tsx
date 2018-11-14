@@ -74,6 +74,11 @@ class App extends Component<{ hangmanStore: HangmanStore }> {
     // @ts-ignore
     const canvas = document.getElementById('gallows');
     // @ts-ignore
+    if (!canvas || !canvas.getContext('2d')) {
+      return null;
+    }
+
+    // @ts-ignore
     const ctx = canvas.getContext('2d');
     ctx.strokeStyle = '#fff';
     ctx.lineWidth = 4;
