@@ -1,4 +1,3 @@
-- [ ] Replace static Hangman image with sprites
 - [ ] Dockerize Phoenix app
 - [ ] Deploy Phoenix app to Kubernetes
 - [ ] Deploy Hangman client (serverless or container?)
