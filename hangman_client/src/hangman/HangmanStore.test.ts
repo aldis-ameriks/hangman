@@ -38,7 +38,7 @@ describe('HangmanStore', () => {
             expect(hangmanStore.letters).toBe('a b');
             expect(hangmanStore.used).toEqual(['c', 'd']);
             expect(hangmanStore.turnsLeft).toBe(1);
-            expect(hangmanStore.notification).toBeUndefined();
+            expect(hangmanStore.notification.type).toBe('info');
             expect(hangmanStore.isGameOver).toBeFalsy();
             done();
           },
@@ -53,6 +53,7 @@ describe('HangmanStore', () => {
       { state: 'lost', notificationType: 'error' },
       { state: 'good_guess', notificationType: 'info' },
       { state: 'already_used', notificationType: 'info' },
+      { state: 'initializing', notificationType: 'info' },
       { state: 'invalid_guess', notificationType: 'warning' },
       { state: 'bad_guess', notificationType: 'warning' },
     ].forEach(({ state, notificationType }) => {

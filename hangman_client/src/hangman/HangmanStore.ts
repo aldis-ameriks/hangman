@@ -12,6 +12,7 @@ const notifications: { [key: string]: HangmanNotification } = {
   bad_guess: { type: 'warning', message: 'One step closer to your demise.' },
   invalid_guess: { type: 'warning', message: "That's not a valid guess." },
   already_used: { type: 'info', message: 'You already guessed that.' },
+  initializing: { type: 'info', message: 'Make your move.' },
   lost: { type: 'error', message: 'Oh no... try again?.' },
   won: { type: 'success', message: 'You may live another day.' },
 };
