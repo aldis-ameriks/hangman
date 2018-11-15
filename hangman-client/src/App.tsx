@@ -50,7 +50,7 @@ class App extends Component<{ hangmanStore: HangmanStore }> {
         <div className="container game-container">
           <div className="row">
             <div className="span6">
-              <canvas id="gallows" height="504px" width="400px">
+              <canvas id="gallows" height="504px" width="300px">
                 Canvas is not supported ;-(
               </canvas>
             </div>
