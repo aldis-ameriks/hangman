@@ -1,2 +1,1 @@
-- [ ] Deploy Hangman client (serverless or container?)
 - [ ] Strip down Phoenix app to bare essentials

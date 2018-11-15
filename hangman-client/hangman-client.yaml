@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hangman-client
+  labels:
+    app: hangman-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hangman-client
+  template:
+    metadata:
+      labels:
+        app: hangman-client
+    spec:
+      containers:
+      - name: hangman-client
+        image: gcr.io/the-affordable-project/hangman-client:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: hangman-client
+spec:
+  selector:
+    app: hangman-client
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
