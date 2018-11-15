@@ -12,9 +12,4 @@ defmodule DictionaryTest do
     assert String.valid?(word)
     assert String.length(word) > 0
   end
-
-  test "random_word/1 returns a word from given list" do
-    word = WordList.random_word(["foo"])
-    assert word == "foo"
-  end
 end
