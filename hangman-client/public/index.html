@@ -24,6 +24,21 @@
             margin-left: 0;
         }
 
+        .span6 {
+            text-align: center;
+        }
+
+        .alert {
+            min-height: 20px;
+        }
+
+        canvas {
+            color: white;
+            border: white solid 2px;
+            padding: 15px;
+            margin-bottom: 40px;
+        }
+
         @media only screen and (min-width: 600px) {
             .game-container {
                 margin-left: 16px;
@@ -33,17 +48,17 @@
             .container {
                 margin-left: 20px;
             }
+        }
 
-            .alert {
-                min-height: 20px;
+        @media only screen and (min-width: 768px) and (max-width: 979px) {
+            .game-container {
+                width: 100% !important;
             }
 
-            canvas {
-                color: white;
-                border: white solid 2px;
-                padding: 15px;
-                margin-bottom: 40px;
+            .span6 {
+                margin-right: 40px;
             }
+        }
     </style>
     <link href="%PUBLIC_URL%/assets/css/bootstrap-responsive.css" rel="stylesheet">
     <link rel="apple-touch-icon-precomposed" sizes="144x144"
