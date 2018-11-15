@@ -54,7 +54,10 @@ class HangmanStore {
   @action
   public initializeGame() {
     const handleResponse = (tally: HangmanGameTally) => (this.game = tally);
-    initializeGame('ws://localhost:4000/socket', handleResponse);
+    initializeGame(
+      process.env.REACT_APP_BACKEND_URL || 'wss://tech.kataldi.com/hangman/api/socket',
+      handleResponse,
+    );
   }
 
   @action

@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hangman-backend
+  labels:
+    app: hangman-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hangman-backend
+  template:
+    metadata:
+      labels:
+        app: hangman-backend
+    spec:
+      containers:
+      - name: hangman-backend
+        image: gcr.io/the-affordable-project/hangman-backend:latest
+        ports:
+        - containerPort: 4000
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: hangman-backend
+spec:
+  selector:
+    app: hangman-backend
+  ports:
+  - protocol: TCP
+    port: 4000
+    targetPort: 4000
