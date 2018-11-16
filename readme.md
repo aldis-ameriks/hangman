@@ -1,6 +1,11 @@
-## Hangman game
+# Hangman game
+  
+This small, fun pet project has been an excuse to explore:
+* Functional programming using Elixir / Phoenix
+* Mobx for frontend state management
+* New CRA v2 + TypeScript
+* [react-testing-library](https://github.com/kentcdodds/react-testing-library) over [enzyme](https://github.com/airbnb/enzyme) for writing tests
 
-An excuse to explore functional programming languages using Elixir and Phoenix. Also Mobx.
+The final unremarkable result is running in an [affordable Kubernetes](https://github.com/aldis-ameriks/affordable-kubernetes) cluster in GCP. Link in the description. :)
 
-The final unremarkable result can be observed here:
-http://tech.kataldi.com/hangman/
+![alt text](./hangman.png | width=250)
