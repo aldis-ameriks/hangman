@@ -2,7 +2,7 @@ FROM bitwalker/alpine-elixir-phoenix:latest
 
 RUN mkdir /app
 COPY . /app
-WORKDIR /app/socket_gallows
+WORKDIR /app/gallows
 
 EXPOSE 4000
 ENV PORT=4000 MIX_ENV=dev
