@@ -20,9 +20,10 @@ defmodule SocketGallowsWeb do
   def controller do
     quote do
       use Phoenix.Controller, namespace: SocketGallowsWeb
+
       import Plug.Conn
-      import SocketGallowsWeb.Router.Helpers
       import SocketGallowsWeb.Gettext
+      alias SocketGallowsWeb.Router.Helpers, as: Routes
     end
   end
 
@@ -33,14 +34,11 @@ defmodule SocketGallowsWeb do
         namespace: SocketGallowsWeb
 
       # Import convenience functions from controllers
-      import Phoenix.Controller, only: [get_flash: 2, view_module: 1]
+      import Phoenix.Controller, only: [get_flash: 1, get_flash: 2, view_module: 1]
 
-      # Use all HTML functionality (forms, tags, etc)
-      use Phoenix.HTML
-
-      import SocketGallowsWeb.Router.Helpers
       import SocketGallowsWeb.ErrorHelpers
       import SocketGallowsWeb.Gettext
+      alias SocketGallowsWeb.Router.Helpers, as: Routes
     end
   end
 

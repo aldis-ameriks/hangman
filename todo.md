@@ -1,1 +1,0 @@
-- [ ] Strip down Phoenix app to bare essentials
