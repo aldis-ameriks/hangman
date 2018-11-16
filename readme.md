@@ -8,4 +8,4 @@ This small, fun pet project has been an excuse to explore:
 
 The final unremarkable result is running in an [affordable Kubernetes](https://github.com/aldis-ameriks/affordable-kubernetes) cluster in GCP. Link in the description. :)
 
-![alt text](./hangman.png | width=250)
+![alt text](./hangman.png)
