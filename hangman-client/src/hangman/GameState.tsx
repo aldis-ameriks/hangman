@@ -1,6 +1,6 @@
 import React from 'react';
+import Typewriter from '../components/Typewriter';
 import { HangmanNotification } from './HangmanStore';
-import Typewriter from './Typewriter';
 
 type Props = {
   notification?: HangmanNotification;

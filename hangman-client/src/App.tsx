@@ -1,11 +1,11 @@
 import { inject, observer } from 'mobx-react';
 import React, { Component } from 'react';
 import posed, { PoseGroup } from 'react-pose';
+import Typewriter from './components/Typewriter';
 import GameControls from './hangman/GameControls';
 import HangmanCanvas from './hangman/HangmanCanvas';
 import HangmanStore from './hangman/HangmanStore';
 import Navbar from './hangman/Navbar';
-import Typewriter from './hangman/Typewriter';
 
 const AnimatedContainer = posed.div({
   enter: { opacity: 1 },
