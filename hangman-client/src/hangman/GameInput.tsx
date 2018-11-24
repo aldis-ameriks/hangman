@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 type Props = {
   makeMove: (guess: string) => void;
@@ -22,26 +23,34 @@ type LetterProps = {
   makeMove: (guess: string) => void;
   used: string[];
 };
+
+type LetterStyledProps = {
+  onClick: () => void;
+  isDisabled: boolean;
+  className: string;
+};
+
+const LetterStyled: any = styled('div')<LetterStyledProps>`
+  display: inline-block;
+  padding: 10px;
+  margin: 10px;
+  width: 35px;
+  height: 40px;
+  text-align: center;
+  border: 1px solid;
+  cursor: ${props => (props.isDisabled ? 'not-allowed' : 'pointer')};
+  color: ${props => (props.isDisabled ? '#757575' : 'white')};
+  :hover {
+    color: ${props => (props.isDisabled ? '#757575' : 'red')};
+  }
+`;
+
 const Letter: React.FunctionComponent<LetterProps> = ({ letter, makeMove, used }) => {
   const isDisabled = used.includes(letter);
   return (
-    <div
-      style={{
-        display: 'inline-block',
-        padding: '10px',
-        margin: '10px',
-        width: '35px',
-        height: '40px',
-        textAlign: 'center',
-        cursor: isDisabled ? 'not-allowed' : 'pointer',
-        color: isDisabled ? '#757575' : 'white',
-        border: '1px solid',
-      }}
-      className="well"
-      onClick={() => makeMove(letter)}
-    >
+    <LetterStyled onClick={() => makeMove(letter)} isDisabled={isDisabled}>
       {letter}
-    </div>
+    </LetterStyled>
   );
 };
 
