@@ -38,6 +38,7 @@ const LetterStyled: any = styled('div')<LetterStyledProps>`
   height: 40px;
   text-align: center;
   border: 1px solid;
+  transition: all linear 150ms;
   cursor: ${props => (props.isDisabled ? 'not-allowed' : 'pointer')};
   color: ${props => (props.isDisabled ? '#757575' : 'white')};
   :hover {
