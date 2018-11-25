@@ -23,7 +23,6 @@ const GameInput: React.FunctionComponent<Props> = ({ makeMove, used }) => {
 type LetterStyledProps = {
   onClick: () => void;
   isDisabled: boolean;
-  className: string;
 };
 
 const LetterBox: any = styled('div')<LetterStyledProps>`
