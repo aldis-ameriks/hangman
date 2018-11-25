@@ -12,16 +12,12 @@ const GameInput: React.FunctionComponent<Props> = ({ makeMove, used }) => {
   return (
     <div data-testid="game-input">
       {letters.map(letter => (
-        <Letter makeMove={makeMove} used={used} letter={letter} key={letter} />
+        <LetterBox onClick={() => makeMove(letter)} isDisabled={used.includes(letter)} key={letter}>
+          {letter}
+        </LetterBox>
       ))}
     </div>
   );
-};
-
-type LetterProps = {
-  letter: string;
-  makeMove: (guess: string) => void;
-  used: string[];
 };
 
 type LetterStyledProps = {
@@ -30,7 +26,7 @@ type LetterStyledProps = {
   className: string;
 };
 
-const LetterStyled: any = styled('div')<LetterStyledProps>`
+const LetterBox: any = styled('div')<LetterStyledProps>`
   display: inline-block;
   padding: 10px;
   margin: 10px;
@@ -45,14 +41,5 @@ const LetterStyled: any = styled('div')<LetterStyledProps>`
     color: ${props => (props.isDisabled ? '#757575' : 'red')};
   }
 `;
-
-const Letter: React.FunctionComponent<LetterProps> = ({ letter, makeMove, used }) => {
-  const isDisabled = used.includes(letter);
-  return (
-    <LetterStyled onClick={() => makeMove(letter)} isDisabled={isDisabled}>
-      {letter}
-    </LetterStyled>
-  );
-};
 
 export default GameInput;
