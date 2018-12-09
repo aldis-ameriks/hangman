@@ -27,4 +27,10 @@ defmodule SocketGallowsWeb.HangmanChannel do
     Logger.error("Unknown message: #{msg}")
     {:noreply, socket}
   end
+
+  def terminate(reason, socket) do
+    Logger.debug "Leaving game: #{inspect reason}"
+    socket.assigns.game |> Hangman.end_game
+    :ok
+  end
 end
