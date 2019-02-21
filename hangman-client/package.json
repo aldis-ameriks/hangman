@@ -19,7 +19,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "docker:build": "docker build -t gcr.io/the-affordable-project/hangman-client .",
+    "docker:push": "docker push gcr.io/the-affordable-project/hangman-client",
+    "docker:deploy": "kubectl apply -f hangman-client.yaml",
+    "docker:setimage": "kubectl set image deployment/hangman-client hangman-client=gcr.io/the-affordable-project/hangman-client:latest"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.1.0",
