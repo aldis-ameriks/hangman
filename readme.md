@@ -7,7 +7,7 @@ This small, fun pet project has been an excuse to explore:
 * [react-testing-library](https://github.com/kentcdodds/react-testing-library) over [enzyme](https://github.com/airbnb/enzyme) for writing tests
 * React pose for animations
 
-The final unremarkable result is running in an [affordable Kubernetes](https://github.com/aldis-ameriks/affordable-kubernetes) cluster in GCP. Link in the description.
+The final unremarkable result is available [here](http://hang-the-man.s3-website-eu-west-1.amazonaws.com).
 The old school look was achieved by using [BOOTSTRA.386](https://github.com/kristopolous/BOOTSTRA.386) 📺
 
 ![alt text](./hangman.png)
