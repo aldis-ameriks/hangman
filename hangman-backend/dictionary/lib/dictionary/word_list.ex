@@ -13,8 +13,7 @@ defmodule Dictionary.WordList do
   end
 
   def word_list do
-    "../../assets/words.txt"
-    |> Path.expand(__DIR__)
+    Path.join(:code.priv_dir(:dictionary), "word_list.txt")
     |> File.read!()
     |> String.split(~r/\n/)
   end
