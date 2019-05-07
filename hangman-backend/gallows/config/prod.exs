@@ -13,7 +13,8 @@ config :socket_gallows, SocketGallowsWeb.Endpoint,
   http: [port: 4000],
   url: [host: "localhost", port: 4000],
   cache_static_manifest: "priv/static/cache_manifest.json",
-  server: true
+  server: true,
+  check_origin: false
 
 # Do not print debug messages in production
 config :logger, level: :info

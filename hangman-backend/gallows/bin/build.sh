@@ -23,6 +23,6 @@ mix compile --force
 # Build the release
 mix release
 # Copy tarball to output
-cp "_build/prod/rel/$APP_NAME/releases/$APP_VSN/$APP_NAME.tar.gz" rel/artifacts/"$APP_NAME-$APP_VSN.tar.gz"
+cp "_build/prod/rel/$APP_NAME/releases/$APP_VSN/$APP_NAME.tar.gz" /opt/build/rel/artifacts/"$APP_NAME-$APP_VSN.tar.gz"
 
 exit 0

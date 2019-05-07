@@ -23,7 +23,8 @@
     "docker:build": "docker build -t gcr.io/the-affordable-project/hangman-client .",
     "docker:push": "docker push gcr.io/the-affordable-project/hangman-client",
     "docker:deploy": "kubectl apply -f hangman-client.yaml",
-    "docker:setimage": "kubectl set image deployment/hangman-client hangman-client=gcr.io/the-affordable-project/hangman-client:latest"
+    "docker:setimage": "kubectl set image deployment/hangman-client hangman-client=gcr.io/the-affordable-project/hangman-client:latest",
+    "deploy": "react-scripts build && aws --profile personal s3 sync build/ s3://hang-the-man"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.1.0",
