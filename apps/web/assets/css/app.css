@@ -1,0 +1,53 @@
+body {
+    padding-top: 40px;
+    font-size: 24px;
+}
+
+h1 {
+    font-size: 34px;
+    line-height: 34px;
+}
+
+.game-container {
+    margin-top: 60px;
+}
+
+.container {
+    margin-left: 0;
+}
+
+.span6 {
+    text-align: center;
+}
+
+.alert {
+    min-height: 20px;
+}
+
+canvas {
+    color: white;
+    border: white solid 2px;
+    padding: 15px;
+    margin-bottom: 40px;
+}
+
+@media only screen and (min-width: 600px) {
+    .game-container {
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+
+    .container {
+        margin-left: 20px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 979px) {
+    .game-container {
+        width: 100% !important;
+    }
+
+    .span6 {
+        margin-right: 40px;
+    }
+}
